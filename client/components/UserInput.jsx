@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
 const UserInput = (props) => {
-  const { score, setScore, getNewPokemon } = props;
+  const { score, setScore, getNewPokemon, pokemon } = props;
 
-  const checkAnswer;
+  const checkAnswer = async (e) => {};
 
-  return (
+  if (!pokemon) 
     <div id='UserInput'>
-      <form onSubmit={getNewPokemon}>
+      <form onSubmit={checkAnswer}>
         <label htmlFor='userAnswer'> </label>
         <input type='text' placeholder='Type your answer here' />
         <input type='submit' value='Submit' />

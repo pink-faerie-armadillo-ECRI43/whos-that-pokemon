@@ -11,14 +11,12 @@ const MainContainer = (props) => {
   // function to get a new pokemon image
   const getNewPokemon = async (e) => {
     //this prevents page from refreshing upon clicking "Submit"
-    e.preventDefault();
     try {
       // make request to server to get a random new pokemon
       let getPokemon = await fetch('/pokemon');
       getPokemon = await getPokemon.json();
       // getPokemon = {name: "Pikachu", image: "URI to image of pikachu"}
       setPokemon(getPokemon);
-      e.target.reset();
     } catch (error) {
       // if there is an error rendering new pokemon state, give
       // if (response.status === 500 ) {
@@ -34,6 +32,7 @@ const MainContainer = (props) => {
         score={score}
         setScore={setScore}
         getNewPokemon={getNewPokemon}
+        pokemon={pokemon}
       />
     </div>
   );
