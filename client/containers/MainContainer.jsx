@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header.jsx';
 import Pokemon from '../components/Pokemon.jsx';
 import UserInput from '../components/UserInput.jsx';
+import Bulbasaur from '../images/bulbasaur.png';
 
 const MainContainer = (props) => {
   const { score, setScore } = props;
@@ -9,7 +10,7 @@ const MainContainer = (props) => {
   const [pokemon, setPokemon] = useState({});
 
   // function to get a new pokemon image
-  const getNewPokemon = async (e) => {
+  const getNewPokemon = async () => {
     //this prevents page from refreshing upon clicking "Submit"
     try {
       // make request to server to get a random new pokemon
@@ -17,16 +18,19 @@ const MainContainer = (props) => {
       getPokemon = await getPokemon.json();
       // getPokemon = {name: "Pikachu", image: "URI to image of pikachu"}
       setPokemon(getPokemon);
+      // test using local image
+      // setPokemon({ name: 'bulbasaur', image: `${Bulbasaur}` });
     } catch (error) {
       // if there is an error rendering new pokemon state, give
-      // if (response.status === 500 ) {
-      alert('Failed to load pokemon');
+      if (getPokemon.status === 500) {
+        alert(`Failed to load pokemon. Error: ${getPokemon.error}`);
+      }
     }
   };
 
   return (
     <div id='MainContainer'>
-      <Header />
+      {/* <Header /> */}
       <Pokemon pokemon={pokemon} getNewPokemon={getNewPokemon} />
       <UserInput
         score={score}
