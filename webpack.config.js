@@ -24,7 +24,7 @@ module.exports = {
         },
       },
       {
-        test: /\.png/,
+        test: /\.(png|mp3)$/,
         type: 'asset/resource',
       },
       {

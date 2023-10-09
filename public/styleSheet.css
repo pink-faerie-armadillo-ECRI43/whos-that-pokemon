@@ -1,45 +1,100 @@
 @import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
 
 body {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  background-color: rgb(80, 202, 102);
+  background-image: url('../client/images/background1.png');
 }
 
 #app {
   display: flex;
   flex-direction: row;
-  align-items: stretch;
+  /* align-items: stretch; */
   justify-content: space-between;
 }
 
+#pokemonImage {
+  background: transparent;
+  filter: contrast(0%) brightness(50%);
+}
+
+#playButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: 1s;
+}
+
+#playButton:hover {
+  transform: rotate(360deg);
+}
+
 #MainContainer {
-  background-color: rgb(233, 150, 61);
+  /* background-color: rgb(233, 150, 61); */
   display: flex;
   flex-direction: column;
+  flex-basis: 60;
   justify-content: center;
+  align-items: center;
+}
+
+#UserInput {
+  display: flex;
+  border: 0;
+  border-bottom: 1px solid #eee;
+  border-radius: 1rem;
+  background-color: #ffd93b;
+  box-shadow: 0px 0.5px 2px 1px #558abb;
+}
+
+#userInputBox {
+  padding: 1rem;
+  border: 0;
+  border-radius: 1rem;
+  background-color: hsl(48, 100%, 62%);
+  /* box-shadow: 2px 1px 1px 1px #558abb; */
+}
+
+#submitButton {
+  border: 2px;
+  background-color: hsl(48, 100%, 55%);
+  border-radius: 1rem;
+  font-family: 'Shrikhand';
+  /* box-shadow: 1px 1px 1px 1px #558abb; */
 }
 
 #LeftSideContainer {
-  background-color: rgb(100, 243, 61);
+  /* background-color: rgb(100, 243, 61); */
   display: flex;
+
+  flex-basis: 20%;
   flex-direction: column;
   justify-content: center;
+}
+
+#HardmodeButton {
+  display: flex;
+  accent-color: #ffd93b;
 }
 
 #RightSideContainer {
-  background-color: rgb(210, 100, 61);
+  /* background-color: rgb(210, 100, 61); */
   display: flex;
   flex-direction: column;
+  flex-basis: 20%;
   justify-content: center;
+  font-family: 'Shrikhand', cursive;
 }
 
-.mainHeader {
+.MainHeader {
   color: #ffd93b;
+  font-size: 64px;
   text-align: center;
   font-family: 'Shrikhand', cursive;
   text-shadow: 5px 5px #558abb;
+}
+
+.score {
+  font-family: 'Shrikhand';
+  font-size: 36px;
 }
 
 p {
