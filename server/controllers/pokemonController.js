@@ -6,7 +6,8 @@ const pokemonController = {};
 pokemonController.getPokemon = async (req, res, next) => {
     try {
         const randomPokemon = await Pokemon.aggregate([ { $sample: { size: 1 } } ]);
-        res.locals.randomPokemon = randomPokemon[0];
+        const { name, imageURL } = randomPokemon[0];
+        res.locals.randomPokemon = {name: name, imageURL: imageURL};
         return next();
     } catch (err) {
         return next({

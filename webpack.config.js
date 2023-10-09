@@ -54,7 +54,7 @@ module.exports = {
       publicPath: 'build',
     },
     proxy: {
-      '/api': 'http://localhost:3000/',
+      '/pokemon': 'http://localhost:3000/',
       // '/api/**': ''
       // {
       //     target: 'http://localhost:3000/',

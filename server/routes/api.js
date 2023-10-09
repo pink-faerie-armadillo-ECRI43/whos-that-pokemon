@@ -3,8 +3,9 @@ const pokemonController = require('../controllers/pokemonController');
 const Pokemon = require('../models/pokemonModels');
 
 const router = express.Router();
+router.use(express.json())
 
-router.get('/pokemon', pokemonController.getPokemon, (req, res) => {
+router.get('/', pokemonController.getPokemon, (req, res) => {
     return res.status(200).json(res.locals.randomPokemon);
 })
 

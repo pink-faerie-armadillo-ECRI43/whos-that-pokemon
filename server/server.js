@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.static(__dirname + '/public/'));
 
 //set up the router here for '/
-app.use('/', apiRouter);
+app.use('/pokemon', apiRouter);
 
 // Unknown route handler
 app.use('*', (req, res) => res.status(404));
