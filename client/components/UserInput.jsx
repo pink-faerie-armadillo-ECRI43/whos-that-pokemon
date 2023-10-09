@@ -11,23 +11,28 @@ const UserInput = (props) => {
       alert('Correct!');
       setScore(score + 1);
       getNewPokemon();
+      e.target.reset();
     } else {
-      alert('Try again!');
+      alert('Incorrect!');
+      getNewPokemon();
+      e.target.reset();
     }
   };
 
-  if (!pokemon.image) {
+  if (!pokemon.imageURL) {
     return <div id='startPageNoInput'></div>;
   }
+
   return (
-    <div id='UserInput'>
-      <form onSubmit={checkAnswer}>
-        <label htmlFor='userAnswer'> </label>
-        <input type='text' placeholder='Type your answer here' />
-        <input type='submit' value='Submit' />
-      </form>
-    </div>
-  );
+      <div id='UserInput'>
+        <form onSubmit={checkAnswer}>
+          <label htmlFor='userAnswer'> </label>
+          <input type='text' placeholder='Type your answer here' />
+          <input type='submit' value='Submit' />
+        </form>
+      </div>
+    );
+  
 };
 
 export default UserInput;

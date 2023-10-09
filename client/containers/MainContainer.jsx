@@ -14,17 +14,20 @@ const MainContainer = (props) => {
     //this prevents page from refreshing upon clicking "Submit"
     try {
       // make request to server to get a random new pokemon
-      let getPokemon = await fetch('/pokemon');
-      getPokemon = await getPokemon.json();
-      // getPokemon = {name: "Pikachu", image: "URI to image of pikachu"}
+      // ex. expected result: {name: "Pikachu", image: <URI to image of pikachu>}
+      const result = await fetch('/pokemon', {headers: {
+        "Content-Type": "application/json"}});
+      const getPokemon = await result.json();
+  
       setPokemon(getPokemon);
       // test using local image
       // setPokemon({ name: 'bulbasaur', image: `${Bulbasaur}` });
     } catch (error) {
       // if there is an error rendering new pokemon state, give
-      if (getPokemon.status === 500) {
-        alert(`Failed to load pokemon. Error: ${getPokemon.error}`);
-      }
+      alert(error)
+      // if (getPokemon.status === 500) {
+      //   alert(`Failed to load pokemon. Error: ${getPokemon.error}`);
+      // }
     }
   };
 

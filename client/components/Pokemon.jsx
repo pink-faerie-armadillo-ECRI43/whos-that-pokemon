@@ -5,7 +5,7 @@ const Pokemon = (props) => {
   const { pokemon, getNewPokemon } = props;
 
   // when page first loads (pokemon = {}) serve static image as start button
-  if (!pokemon.image) {
+  if (!pokemon.imageURL) {
     return (
       <div id='startScreen'>
         <button onClick={getNewPokemon}>
@@ -16,7 +16,7 @@ const Pokemon = (props) => {
   }
   return (
     <div id='pokemon'>
-      <img src={pokemon.image} />
+      <img src={pokemon.imageURL} />
     </div>
   );
 };

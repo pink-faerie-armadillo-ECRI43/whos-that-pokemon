@@ -1,21 +1,15 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
+const apiRouter = require('./routes/api');
 
 const PORT = 3000;
-
-const { MongoClient, ServerApiVersion } = require('mongodb');
-//Put custom uri info here
-// const uri =
-
-// mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connection.once('open', () => {
-  console.log('Connected to Database');
-});
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(__dirname + '/public/'));
+
+//set up the router here for '/
+app.use('/pokemon', apiRouter);
 
 // Unknown route handler
 app.use('*', (req, res) => res.status(404));
