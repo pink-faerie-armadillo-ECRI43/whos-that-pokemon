@@ -2,39 +2,50 @@ import React, { useState } from 'react';
 import Header from '../components/Header.jsx';
 import Pokemon from '../components/Pokemon.jsx';
 import UserInput from '../components/UserInput.jsx';
-import Bulbasaur from '../images/bulbasaur.png';
+// import Bulbasaur from '../images/bulbasaur.png';
+
+/*
+
+/////// MAIN CONTAINER \\\\\\\
+Holds Header, Pokemon, and User Input components.
+- Inherits score, pokemon, and hardmode state and setter functions from App
+- We've commented out a local test image, Bublasaur, that can be used to test the setPokemon function:
+  - i.e. setPokemon({ name: 'bulbasaur', image: `${Bulbasaur}` });
+
+*/
 
 const MainContainer = (props) => {
-  const { score, setScore } = props;
-  //create pokemon state to render new pokemon image and passing down to relevant containers
-  const [pokemon, setPokemon] = useState({});
+  const { score, setScore, pokemon, setPokemon, hardmode, setHardmode } = props;
 
-  // function to get a new pokemon image
+  // Fetch new pokemon from the database:
   const getNewPokemon = async () => {
-    //this prevents page from refreshing upon clicking "Submit"
+    // Makes fetch request to server to get a random new pokemon
+    // expected result: {name: <pokemon name>, image: <image URI>}
+    // result is converted to JSON and then passed through the setter function
+    //  - this updates pokemon state with newly-fetched pokemon
     try {
-      // make request to server to get a random new pokemon
-      // ex. expected result: {name: "Pikachu", image: <URI to image of pikachu>}
-      const result = await fetch('/pokemon', {headers: {
-        "Content-Type": "application/json"}});
+      const result = await fetch('/pokemon', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       const getPokemon = await result.json();
-  
+
       setPokemon(getPokemon);
-      // test using local image
-      // setPokemon({ name: 'bulbasaur', image: `${Bulbasaur}` });
     } catch (error) {
-      // if there is an error rendering new pokemon state, give
-      alert(error)
-      // if (getPokemon.status === 500) {
-      //   alert(`Failed to load pokemon. Error: ${getPokemon.error}`);
-      // }
+      alert(`${error}: failed to load Pokemon`);
     }
   };
 
   return (
     <div id='MainContainer'>
-      {/* <Header /> */}
-      <Pokemon pokemon={pokemon} getNewPokemon={getNewPokemon} />
+      <Header />
+      <Pokemon
+        pokemon={pokemon}
+        getNewPokemon={getNewPokemon}
+        hardmode={hardmode}
+        setHardmode={setHardmode}
+      />
       <UserInput
         score={score}
         setScore={setScore}

@@ -16,28 +16,27 @@ const Schema = mongoose.Schema;
 
 //Mongoose schema for pokemon data with fields for name and imageURL
 const pokemonSchema = new Schema({
-    name: String,
-    imageURL: String
+  name: String,
+  imageURL: String,
 });
 
 //Mongoose schema for User data with field sfor username and password
 const userSchema = new Schema({
   username: {
-      type: String,
-      required: true,
-      unique: true
+    type: String,
+    required: true,
+    unique: true,
   },
   password: {
-      type: String,
-      required: true
-  }
-})
-
+    type: String,
+    required: true,
+  },
+});
 
 const Pokemon = mongoose.model('Pokemon', pokemonSchema);
 const User = mongoose.model('User', userSchema);
 
 module.exports = {
   Pokemon,
-  User
+  User,
 };
