@@ -15,8 +15,8 @@ mongoose.connection.once('open', () => {
 const Schema = mongoose.Schema;
 
 const pokemonSchema = new Schema({
-    name: String,
-    imageURL: String
+  name: String,
+  imageURL: String,
 });
 
 const Pokemon = mongoose.model('Pokemon', pokemonSchema);

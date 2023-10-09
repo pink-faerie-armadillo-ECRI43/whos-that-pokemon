@@ -15,16 +15,19 @@ const MainContainer = (props) => {
     try {
       // make request to server to get a random new pokemon
       // ex. expected result: {name: "Pikachu", image: <URI to image of pikachu>}
-      const result = await fetch('/pokemon', {headers: {
-        "Content-Type": "application/json"}});
+      const result = await fetch('/pokemon', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       const getPokemon = await result.json();
-  
+
       setPokemon(getPokemon);
       // test using local image
       // setPokemon({ name: 'bulbasaur', image: `${Bulbasaur}` });
     } catch (error) {
       // if there is an error rendering new pokemon state, give
-      alert(error)
+      alert(error);
       // if (getPokemon.status === 500) {
       //   alert(`Failed to load pokemon. Error: ${getPokemon.error}`);
       // }
@@ -33,7 +36,7 @@ const MainContainer = (props) => {
 
   return (
     <div id='MainContainer'>
-      {/* <Header /> */}
+      <Header />
       <Pokemon pokemon={pokemon} getNewPokemon={getNewPokemon} />
       <UserInput
         score={score}
