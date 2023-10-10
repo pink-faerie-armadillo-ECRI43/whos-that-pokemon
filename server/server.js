@@ -2,11 +2,13 @@ const express = require('express');
 const app = express();
 const apiRouter = require('./routes/api');
 
-const PORT = 3000;
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(__dirname + '/public/'));
+
+app.get('/test', async (req, res) => {
+  res.json({ message: 'pass!' });
+});
 
 //set up the router here for '/
 app.use('/pokemon', apiRouter);
@@ -26,4 +28,5 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
+//moved server start to start.js
+module.exports = app;
