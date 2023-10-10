@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
-require('dotenv').config();
+// require('dotenv').config();
 
-const mongoString = process.env.DATABASE_URL;
+// const mongoString = process.env.DATABASE_URL;
+const mongoString =
+  'mongodb+srv://hsweat:Ih1qfs1XX5lylqix@cluster0.mfqqgp1.mongodb.net/?retryWrites=true&w=majority';
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 //Put custom uri info here
