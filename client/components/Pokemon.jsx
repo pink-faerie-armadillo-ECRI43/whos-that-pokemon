@@ -21,7 +21,7 @@ const Pokemon = (props) => {
   if (hardmode === false) {
     return (
       <div id='pokemon'>
-        <audio id='audio' src={music} autoPlay></audio>
+        {/* <audio id='audio' src={music} autoPlay></audio> */}
         <img src={pokemon.imageURL} />
       </div>
     );
