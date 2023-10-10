@@ -6,6 +6,10 @@ it('jest is working', () => {
 });
 
 describe('route integration', () => {
+  //error: app.close is not a fn?
+  //   afterAll(async () => {
+  //     app.close();
+  //   });
   describe('/test endpoint', () => {
     describe('GET', () => {
       it('gets the test message', async () => {
@@ -16,8 +20,19 @@ describe('route integration', () => {
   });
   describe('/pokemon/', () => {
     describe('GET', () => {
-      it('responds with a 200 status', () => {
-        return request(app).get('/pokemon/').expect(200);
+      it('responds with a 200 status and content type json', async () => {
+        const response = await request(app).get('/pokemon/');
+        expect(response.status).toBe(200);
+        expect(response.headers['content-type']).toBe(
+          'application/json; charset=utf-8'
+        );
+      });
+      it('responds with pokemon name and imageURL as strings', async () => {
+        const response = await request(app).get('/pokemon/');
+        expect(response.body.name).toBeDefined();
+        expect(typeof response.body.name).toBe('string');
+        expect(response.body.imageURL).toBeDefined();
+        expect(typeof response.body.imageURL).toBe('string');
       });
     });
   });
