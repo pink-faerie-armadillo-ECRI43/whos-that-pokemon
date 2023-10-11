@@ -15,7 +15,7 @@ const LeftSideContainer = (props) => {
 
   //This condition hides the score if no pokemon has been fetched.
   if (!pokemon.imageURL) {
-    return <div id='LeftSideContainer'></div>;
+    return <div id='LeftSideContainer' data-testid='leftContainer'></div>;
   }
   if (score > highScore) {
     setHighScore(score);
@@ -23,8 +23,12 @@ const LeftSideContainer = (props) => {
 
   return (
     <div id='LeftSideContainer'>
-      <h2 className='score'>Score: {score}</h2>
-      <h2 className='score'>Highscore: {highScore}</h2>
+      <h2 className='score' data-testid='score'>
+        Score: {score}
+      </h2>
+      <h2 className='score' data-testid='highscore'>
+        Highscore: {highScore}
+      </h2>
     </div>
   );
 };
