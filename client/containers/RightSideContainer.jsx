@@ -14,6 +14,7 @@ Holds our Game Options:
 
 */
 
+// props coming from play.js
 const RightSideContainer = (props) => {
   const { hardmode, setHardmode, pokemon } = props;
   //This functionality changes the state of Hardmode.
@@ -25,12 +26,13 @@ const RightSideContainer = (props) => {
     }
   };
   // This condition hides the options until a pokemon is fetched.
-  if (!pokemon.imageURL) {
-    return <div id='RightSideContainer' data-testid='rightContainer'></div>;
-  }
+  // if (!pokemon.imageURL) {
+  //   return <div id='RightSideContainer' data-testid='rightContainer'></div>;
+  // }
 
   return (
     <div id='RightSideContainer' onChange={onChangeValue}>
+      <h1>Game Options</h1>
       <div id='HardmodeButton'>
         <input type='checkbox' checked={hardmode === true} />
         Hardmode

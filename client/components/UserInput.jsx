@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+// props coming from MainContainer.js
 const UserInput = (props) => {
   const { score, setScore, getNewPokemon, pokemon } = props;
 

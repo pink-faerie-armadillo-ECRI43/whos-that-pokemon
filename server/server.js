@@ -24,9 +24,8 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
+//move server start to start.js for testing
 const PORT = 3000;
 
 app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
-
-//move server start to start.js for testing
 module.exports = app;

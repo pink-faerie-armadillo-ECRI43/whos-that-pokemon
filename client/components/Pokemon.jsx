@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import playButton from '../images/playButton.png';
 import music from '../music/onplaymusic.mp3';
 
+// props coming from MainContainer.js
 const Pokemon = (props) => {
   const { pokemon, getNewPokemon, hardmode, setHardmode } = props;
 
