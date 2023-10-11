@@ -11,22 +11,20 @@ const Leaderboard = () => {
     const userList = await response.json();
     console.log('userlist', userList);
   };
-  //use effect to load in leaderboard
-  useEffect(() => {
-    getLeaderboard();
-  }, []);
+
   let DBScore;
   const getDBScore = async () => {
-    const response = await fetch(
-      `/pokemon/leaderboard/${currentUser.username}`
-    );
-    response = response.json();
+    let response = await fetch(`/pokemon/leaderboard/${currentUser.username}`);
+    response = await response.json();
+    console.log('GET response', response);
     DBScore = response.highScore;
+    console.log('db score', DBScore, 'score', score);
   };
   const updateDBScore = async () => {
     //if score > currentUser.highScore
     //post request to update user's high score (to /pokemon/leaderboard/:username)
     if (score > DBScore) {
+      console.log('in if condition');
       const body = JSON.stringify({ highScore: score });
       const response = await fetch(
         `/pokemon/leaderboard/${currentUser.username}`,
@@ -38,10 +36,13 @@ const Leaderboard = () => {
           body,
         }
       );
+      console.log('update response', response);
     }
   };
-  //use effect to load in user high score
+
+  //use effect to load in leaderboard and user high score, and update user high score
   useEffect(() => {
+    getLeaderboard();
     getDBScore();
     updateDBScore();
   }, []);
