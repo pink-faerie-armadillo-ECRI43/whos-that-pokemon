@@ -10,9 +10,11 @@ import styles from '../public/styleSheet.css';
 
 const root = createRoot(document.querySelector('#root'));
 root.render(
+
   <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
   </Provider>
+
 );

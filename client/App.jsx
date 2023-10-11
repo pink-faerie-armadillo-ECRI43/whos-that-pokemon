@@ -1,10 +1,12 @@
 import React, { useState } from 'react'; //no need to use usestate after changing to redux
+
 import MainContainer from './containers/MainContainer.jsx';
 import LeftSideContainer from './containers/LeftSideContainer.jsx';
 import RightSideContainer from './containers/RightSideContainer.jsx';
 // importing redux related stuff
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import { store } from './redux/store';
+
 import { setScore, setHardmode, setPokemon } from './redux/gameSlice';
 
 const App = () => {
@@ -30,11 +32,13 @@ const App = () => {
 
   // pass store down to each container
   return (
+
     <div id='app'>
       <LeftSideContainer />
       <MainContainer />
       <RightSideContainer />
     </div>
+
   );
 };
 
