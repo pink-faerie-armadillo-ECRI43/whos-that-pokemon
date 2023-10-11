@@ -13,10 +13,27 @@ Displays high score and current score (which User Input resets to 0 upon failing
 */
 
 // props coming from play.js
-const LeftSideContainer = () => {
+const LeftSideContainer = (props) => {
+  const { currentUser, score, pokemon } = props;
+
+  useEffect(async () => {
+    //if score > currentUser.highScore
+    //post request to update user's high score to /pokemon/leaderboard/:name
+    if (score > currentUser.highScore) {
+      const response = await fetch(
+        `/pokemon/leaderboard/${currentUser.username}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+          body: { highScore: score },
+        }
+      );
+    }
+  }, [score]);
   const score = useSelector((state) => state.game.score);
   const pokemon = useSelector((state) => state.game.pokemon);
-  const highScore = useSelector((state) => state.user.highScore);
 
   //This condition hides the score if no pokemon has been fetched.
   if (!pokemon.imageURL) {
