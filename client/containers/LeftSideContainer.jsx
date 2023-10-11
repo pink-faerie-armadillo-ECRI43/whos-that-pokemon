@@ -9,6 +9,7 @@ Displays high score and current score (which User Input resets to 0 upon failing
 
 */
 
+// props coming from play.js
 const LeftSideContainer = (props) => {
   const { score, pokemon } = props;
   const [highScore, setHighScore] = useState(0);
