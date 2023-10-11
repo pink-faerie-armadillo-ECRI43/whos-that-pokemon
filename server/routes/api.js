@@ -24,6 +24,18 @@ router.post('/login', userController.loginUser, (req, res) => {
   return res.status(200).json('User is logged in');
 });
 
+router.get('/leaderboard', userController.getLeaderboard, (req, res) => {
+  return res.status(200).json(res.locals.leaderboard);
+});
+
+router.get('/leaderboard/:id', userController.getHighScore, (req, res) => {
+  return res.status(200).json(res.locals.highScore);
+});
+
+router.post('/leaderboard/:id', userController.updateHighScore, (req, res) => {
+  return res.status(200).json(res.locals.newHighScore);
+});
+
 // This router is designed to populate your database. It looks unconventional, but it does work.
 // Essentially, the router calls our middleware function, fetchPokemonData, to populate an array
 // of pokemon objects from the 3rd party api. It runs pokemon.create on this array, which then populates

@@ -73,4 +73,62 @@ userController.loginUser = async (req, res, next) => {
   }
 };
 
+userController.getLeaderboard = async (req, res, next) => {
+  try {
+    //get 10 usernames and highscores from db, sorted by descending score
+    let users = await User.find({}, 'username highScore', {
+      sort: { highScore: -1 },
+      limit: 10,
+    });
+    //save onto res.locals.leaderboard
+    res.locals.leaderboard = users;
+    return next();
+  } catch (err) {
+    return next({
+      log: 'Error in userController.getLeaderboard middleware.',
+      status: 500,
+      message: 'Unable to get leaderboard at this time.',
+    });
+  }
+};
+
+userController.getHighScore = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    //get highscore of user matching user ID
+    let highScore = await User.findOne({ _id: id }, 'highScore');
+    //save onto res.locals.highScore
+    res.locals.highScore = highScore;
+    return next();
+  } catch (err) {
+    return next({
+      log: 'Error in userController.getHighScore middleware.',
+      status: 500,
+      message: "Unable to get user's high score at this time.",
+    });
+  }
+};
+
+userController.updateHighScore = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const newScore = req.body.highScore;
+    //get highscore of user matching user ID
+    let updated = await User.findOneAndUpdate(
+      { _id: id },
+      { highScore: newScore },
+      { new: true }
+    );
+    //save onto res.locals.newHighScore
+    res.locals.newHighScore = updated.highScore;
+    return next();
+  } catch (err) {
+    return next({
+      log: 'Error in userController.updateHighScore middleware.',
+      status: 500,
+      message: "Unable to update user's high score at this time.",
+    });
+  }
+};
+
 module.exports = userController;
