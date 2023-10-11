@@ -52,6 +52,7 @@ userController.loginUser = async (req, res, next) => {
         res.locals.existingUser = {
           success: true,
           name: existingUser.username,
+          highScore: existingUser.highScore,
         };
         console.log('I am at userController');
         return next();
@@ -99,9 +100,9 @@ userController.getLeaderboard = async (req, res, next) => {
 
 userController.getHighScore = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    //get highscore of user matching user ID
-    let highScore = await User.findOne({ _id: id }, 'highScore');
+    const { name } = req.params;
+    //get highscore of user matching username
+    let highScore = await User.findOne({ username: name }, 'highScore');
     //save onto res.locals.highScore
     res.locals.highScore = highScore;
     return next();
@@ -117,11 +118,11 @@ userController.getHighScore = async (req, res, next) => {
 userController.updateHighScore = async (req, res, next) => {
   try {
     //POST request wit body {highScore: (number)}
-    const { id } = req.params;
+    const { name } = req.params;
     const newScore = req.body.highScore;
     //get highscore of user matching user ID
     let updated = await User.findOneAndUpdate(
-      { _id: id },
+      { username: name },
       { highScore: newScore },
       { new: true }
     );

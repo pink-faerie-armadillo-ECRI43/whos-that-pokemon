@@ -26,6 +26,7 @@ const App = () => {
         path='/play'
         element={
           <Play
+            currentUser={currentUser}
             score={score}
             setScore={setScore}
             hardmode={hardmode}
