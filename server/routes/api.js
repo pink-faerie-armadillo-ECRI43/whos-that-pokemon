@@ -1,6 +1,7 @@
 const express = require('express');
 const pokemonController = require('../controllers/pokemonController');
 const userController = require('../controllers/userController');
+const leaderboardController = require('../controllers/leaderboardController')
 const Pokemon = require('../models/pokemonModels');
 
 
@@ -25,6 +26,11 @@ router.post('/login', userController.loginUser, (req, res) => {
   return res.status(200).json('User is logged in');
 })
 
+router.get('/leaderboard', leaderboardController.getHighScores);
+
+router.patch('/leaderboard', leaderboardController.getUserAndUpdate, (req, res) => {
+  return res.status(200).json({username: res.locals.username});
+})
 // This router is designed to populate your database. It looks unconventional, but it does work.
 // Essentially, the router calls our middleware function, fetchPokemonData, to populate an array
 // of pokemon objects from the 3rd party api. It runs pokemon.create on this array, which then populates

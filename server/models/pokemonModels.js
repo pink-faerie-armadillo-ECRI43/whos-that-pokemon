@@ -33,6 +33,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  userHighScore: {
+    type: Number,
+    default: 0,
+  }
 });
 
 const Pokemon = mongoose.model('Pokemon', pokemonSchema);
