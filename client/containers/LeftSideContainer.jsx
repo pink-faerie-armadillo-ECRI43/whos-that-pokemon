@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { setScore } from '../redux/gameSlice';
 
 /*
 
@@ -10,15 +12,15 @@ Displays high score and current score (which User Input resets to 0 upon failing
 */
 
 const LeftSideContainer = (props) => {
-  const { score, pokemon } = props;
-  const [highScore, setHighScore] = useState(0);
+  const score = useSelector((state) => state.game.score);
+  const pokemon = useSelector((state) => state.game.pokemon);
 
   //This condition hides the score if no pokemon has been fetched.
   if (!pokemon.imageURL) {
     return <div id='LeftSideContainer' data-testid='leftContainer'></div>;
   }
-  if (score > highScore) {
-    setHighScore(score);
+  if (score > pokemon.highScore) {
+    dispatch(setScore(score));
   }
 
   return (
@@ -27,7 +29,7 @@ const LeftSideContainer = (props) => {
         Score: {score}
       </h2>
       <h2 className='score' data-testid='highscore'>
-        Highscore: {highScore}
+        Highscore: {pokemon.highScore}
       </h2>
     </div>
   );
