@@ -18,7 +18,7 @@ router.get('/', pokemonController.getPokemon, (req, res) => {
 
 router.get('/leaderboard', leaderboardController.getHighScores);
 
-router.patch('/leaderboard', leaderboardController.getUserAndUpdate, (req, res) => {
+router.patch('/userHighScore', leaderboardController.getUserAndUpdate, (req, res) => {
   return res.status(200).json({username: res.locals.username});
 })
 // This router is designed to populate your database. It looks unconventional, but it does work.
