@@ -1,7 +1,7 @@
 const express = require('express');
 const pokemonController = require('../controllers/pokemonController');
 const userController = require('../controllers/userController');
-const { Pokemon } = require('../models/pokemonModels.js');
+const { Pokemon } = require('../models/pokemonModels');
 
 const router = express.Router();
 router.use(express.json());
