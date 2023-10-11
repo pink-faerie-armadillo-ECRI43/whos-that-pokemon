@@ -5,6 +5,7 @@ import RightSideContainer from '../containers/RightSideContainer.jsx';
 
 // props coming from App.js
 const Play = ({
+  currentUser,
   score,
   setScore,
   hardmode,
@@ -14,7 +15,11 @@ const Play = ({
 }) => {
   return (
     <div id='app'>
-      <LeftSideContainer score={score} pokemon={pokemon} />
+      <LeftSideContainer
+        currentUser={currentUser}
+        score={score}
+        pokemon={pokemon}
+      />
       <MainContainer
         pokemon={pokemon}
         setPokemon={setPokemon}

@@ -32,13 +32,28 @@ const App = () => {
 
   // pass store down to each container
   return (
-
-    <div id='app'>
-      <LeftSideContainer />
-      <MainContainer />
-      <RightSideContainer />
-    </div>
-
+    <Routes>
+      <Route
+        path='/'
+        element={
+          <Login currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        }
+      />
+      <Route
+        path='/play'
+        element={
+          <Play
+            currentUser={currentUser}
+            score={score}
+            setScore={setScore}
+            hardmode={hardmode}
+            setHardmode={setHardmode}
+            pokemon={pokemon}
+            setPokemon={setPokemon}
+          />
+        }
+      />
+    </Routes>
   );
 };
 
