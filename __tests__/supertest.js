@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 const request = require('supertest');
 const app = require('../server/server.js');
 const { User } = require('../server/models/pokemonModels.js');
