@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">24.13% </span>
+                <span class="strong">42.85% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/29</span>
+                <span class='fraction'>12/28</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>1/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">24.13% </span>
+                <span class="strong">42.85% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/29</span>
+                <span class='fraction'>12/28</span>
             </div>
         
             
@@ -138,7 +138,8 @@
 <a name='L73'></a><a href='#L73'>73</a>
 <a name='L74'></a><a href='#L74'>74</a>
 <a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -182,21 +183,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -205,6 +199,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -213,7 +214,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const { User } = require('../models/pokemonModels');
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const { User } = require('../models/pokemonModels');
 const fetch = require('node-fetch');
 const bcrypt = require('bcrypt');
 &nbsp;
@@ -227,75 +229,76 @@ const userController = {};
 // If it does, it prompts the user to enter a different username. If it doesn't exist,
 // then the password gets encrypted and a new user is created in the db.
 userController.createUser = <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
-<span class="cstat-no" title="statement not covered" >    try {</span>
-        const { username, password } = <span class="cstat-no" title="statement not covered" >req.body;</span>
-        const existingUser = <span class="cstat-no" title="statement not covered" >await User.findOne({username: username});</span>
-<span class="cstat-no" title="statement not covered" >        if (existingUser) {</span>
-<span class="cstat-no" title="statement not covered" >            return next({</span>
-                log: 'Username already exists.',
-                status: 400,
-                message: 'Username already exists, select a different username.'
-            })
-        } else {
-            const salt = <span class="cstat-no" title="statement not covered" >await bcrypt.genSalt(10);</span>
-            const hashedPassword = <span class="cstat-no" title="statement not covered" >await bcrypt.hash(password, salt);</span>
-<span class="cstat-no" title="statement not covered" >            await User.create({username: username, password: hashedPassword});</span>
-<span class="cstat-no" title="statement not covered" >            console.log('User created');</span>
-<span class="cstat-no" title="statement not covered" >            return next()</span>
-        }        
-    } catch (err) {
-<span class="cstat-no" title="statement not covered" >        return next({</span>
-            log: 'Error in userController.createUser middleware.',
-            status: 500,
-            message: 'Could not create user.'
-        });
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const { username, password } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+    const existingUser = <span class="cstat-no" title="statement not covered" >await User.findOne({ username: username });</span>
+<span class="cstat-no" title="statement not covered" >    if (existingUser) {</span>
+<span class="cstat-no" title="statement not covered" >      return next({</span>
+        log: 'Username already exists.',
+        status: 400,
+        message: 'Username already exists, select a different username.',
+      });
+    } else {
+      const salt = <span class="cstat-no" title="statement not covered" >await bcrypt.genSalt(10);</span>
+      const hashedPassword = <span class="cstat-no" title="statement not covered" >await bcrypt.hash(password, salt);</span>
+<span class="cstat-no" title="statement not covered" >      await User.create({ username: username, password: hashedPassword });</span>
+<span class="cstat-no" title="statement not covered" >      console.log('User created');</span>
+<span class="cstat-no" title="statement not covered" >      return next();</span>
     }
-}
+  } catch (err) {
+<span class="cstat-no" title="statement not covered" >    return next({</span>
+      log: 'Error in userController.createUser middleware.',
+      status: 500,
+      message: 'Could not create user.',
+    });
+  }
+};
 // loginUser takes the req.body and compares the username against what appears in the db.
 // If the username exists, it then does a check to see if the password provided checks with
 // the bcrypted password stored in the db. If either the username or passwrod don't check out,
 // it gives a generic response, but logs whether it was an incorrect username or password in
-// the terminal. 
-userController.loginUser = <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
-<span class="cstat-no" title="statement not covered" >    try {</span>
-        const { username, password } = <span class="cstat-no" title="statement not covered" >req.body;</span>
-        const existingUser = <span class="cstat-no" title="statement not covered" >await User.findOne({username: username});</span>
-<span class="cstat-no" title="statement not covered" >        if (existingUser) {</span>
-            const result = <span class="cstat-no" title="statement not covered" >await bcrypt.compare(password, existingUser.password);</span>
-<span class="cstat-no" title="statement not covered" >            if (result) {</span>
-<span class="cstat-no" title="statement not covered" >                res.locals.existingUser = existingUser;</span>
-<span class="cstat-no" title="statement not covered" >                return next();</span>
-            } else {
-<span class="cstat-no" title="statement not covered" >                return next({</span>
-                    log: 'Incorrect paswword.',
-                    status: 401,
-                    message: 'Incorrect user name or password.'
-                })
-            }            
-        } else {
-<span class="cstat-no" title="statement not covered" >            return next({</span>
-                log: 'Incorrect username.',
-                status: 401,
-                message: 'Incorrect user name or password.'
-            })
-        }
-    } catch (err) {
+// the terminal.
+userController.loginUser = async (req, res, next) =&gt; {
+  try {
+    const { username, password } = req.body;
+    const existingUser = await User.findOne({ username: username });
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (existingUser) {
+      // const result = await bcrypt.compare(password, existingUser.password);
+<span class="cstat-no" title="statement not covered" >      if (existingUser) {</span>
+<span class="cstat-no" title="statement not covered" >        res.locals.existingUser = existingUser;</span>
+<span class="cstat-no" title="statement not covered" >        return next();</span>
+      } else {
 <span class="cstat-no" title="statement not covered" >        return next({</span>
-            log: 'Error in userController.loginUser middleware.',
-            status: 500,
-            message: 'Unable to login at this time.'
-        })
+          log: 'Incorrect paswword.',
+          status: 401,
+          message: 'Incorrect user name or password.',
+        });
+      }
+    } else {
+      return next({
+        log: 'Incorrect username.',
+        status: 401,
+        message: 'Incorrect user name or password.',
+      });
     }
-}
+  } catch (err) {
+<span class="cstat-no" title="statement not covered" >    return next({</span>
+      log: 'Error in userController.loginUser middleware.',
+      status: 500,
+      message: 'Unable to login at this time.',
+    });
+  }
+};
 &nbsp;
-module.exports = userController;</pre></td></tr></table></pre>
+module.exports = userController;
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-10-10T21:13:11.967Z
+                at 2023-10-10T23:47:50.288Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

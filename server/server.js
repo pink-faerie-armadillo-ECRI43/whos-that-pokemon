@@ -6,10 +6,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(__dirname + '/public/'));
 
-app.get('/test', async (req, res) => {
-  res.json({ message: 'pass!' });
-});
-
 //set up the router here for '/
 app.use('/pokemon', apiRouter);
 
