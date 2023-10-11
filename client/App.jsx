@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import MainContainer from './containers/MainContainer.jsx';
 import LeftSideContainer from './containers/LeftSideContainer.jsx';
 import RightSideContainer from './containers/RightSideContainer.jsx';
+import { Route, Routes } from 'react-router';
 
 const App = () => {
   // initializing states
