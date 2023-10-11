@@ -5,6 +5,7 @@ const leaderboardController ={};
 leaderboardController.getHighScores = async (req, res, next) => {
     try {
         const leaderboardData = await User.find({}, 'username userHighScore')
+        .sort({ userHighScore: -1 });
         res.json(leaderboardData);
         return next();
     } catch (error){
