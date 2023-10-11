@@ -12,19 +12,9 @@ router.use(express.json())
 //Returns the json responce containing the random pokemon data
 router.get('/', pokemonController.getPokemon, (req, res) => {
   return res.status(200).json(res.locals.randomPokemon);
-})
+});
 
-// Route to handle user registration using the createUser middleware from userController.
-// Returns a JSON response indicating that the user has been added to the database.
-router.post('/signup', userController.createUser, (req, res) => {
-  return res.status(200).json('Added user to the db');
-})
 
-// Route to handle user login using the loginUser middleware from userController.
-// Returns a JSON response indicating that the user is logged in.
-router.post('/login', userController.loginUser, (req, res) => {
-  return res.status(200).json('User is logged in');
-})
 
 router.get('/leaderboard', leaderboardController.getHighScores);
 
