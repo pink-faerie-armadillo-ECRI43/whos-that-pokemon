@@ -10,7 +10,6 @@ cookieController.setSSIDCookie = async (req, res, next) => {
   const { username, _id } = res.locals.existingUser;
   sessions[sessionId] = { username, userId: _id };
   res.cookie('SSID', `session=${sessionId}`);
-  console.log('I am in cookieController');
   return next();
 };
 
