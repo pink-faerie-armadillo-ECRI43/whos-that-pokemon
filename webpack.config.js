@@ -6,8 +6,9 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build'),
+    publicPath: '/',
   },
-  mode: 'development',
+  mode: process.env.NODE_ENV,
   module: {
     rules: [
       {
@@ -55,12 +56,7 @@ module.exports = {
     },
     proxy: {
       '/pokemon': 'http://localhost:3000/',
-      '/user': 'http://localhost:3000/'
-      // '/api/**': ''
-      // {
-      //     target: 'http://localhost:3000/',
-      //     secure: false,
-      // }
     },
+    historyApiFallback: true,
   },
 };
