@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { setScore } from '../redux/gameSlice';
 
 /*
 
@@ -29,18 +31,24 @@ const LeftSideContainer = (props) => {
       );
     }
   }, [score]);
+  const score = useSelector((state) => state.game.score);
+  const pokemon = useSelector((state) => state.game.pokemon);
 
   //This condition hides the score if no pokemon has been fetched.
   if (!pokemon.imageURL) {
     return <div id='LeftSideContainer' data-testid='leftContainer'></div>;
   }
+  if (score > pokemon.highScore) {
+    dispatch(setScore(score));
+  }
+
   return (
     <div id='LeftSideContainer'>
       <h2 className='score' data-testid='score'>
         Score: {score}
       </h2>
       <h2 className='score' data-testid='highscore'>
-        Highscore: {currentUser.highScore}
+        Highscore: {pokemon.highScore}
       </h2>
     </div>
   );

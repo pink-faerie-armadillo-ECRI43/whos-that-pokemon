@@ -1,19 +1,36 @@
-import React, { useState } from 'react';
-// import MainContainer from './containers/MainContainer.jsx';
-// import LeftSideContainer from './containers/LeftSideContainer.jsx';
-// import RightSideContainer from './containers/RightSideContainer.jsx';
-import { Route, Routes } from 'react-router';
-import Play from './routes/Play.js';
-import Login from './routes/Login.js';
+import React, { useState } from 'react'; //no need to use usestate after changing to redux
+
+import MainContainer from './containers/MainContainer.jsx';
+import LeftSideContainer from './containers/LeftSideContainer.jsx';
+import RightSideContainer from './containers/RightSideContainer.jsx';
+// importing redux related stuff
+import { Provider, useSelector, useDispatch } from 'react-redux';
+import { store } from './redux/store';
+
+import { setScore, setHardmode, setPokemon } from './redux/gameSlice';
 
 const App = () => {
-  // initializing states
-  const [score, setScore] = useState(0);
-  const [hardmode, setHardmode] = useState(false);
-  const [pokemon, setPokemon] = useState({});
-  const [currentUser, setCurrentUser] = useState({});
+  // Define functions to dispatch actions
+  const dispatch = useDispatch();
 
-  // set up each container and pass appropraite states down props chain
+  const handleSetScore = (newScore) => {
+    dispatch(setScore(newScore));
+  };
+
+  const handleSetHardmode = (isHardmode) => {
+    dispatch(setHardmode(isHardmode));
+  };
+
+  const handleSetPokemon = (newPokemon) => {
+    dispatch(setPokemon(newPokemon));
+  };
+
+  // access state property using useSelector
+  const score = useSelector((state) => state.game.score);
+  const hardmode = useSelector((state) => state.game.hardmode);
+  const pokemon = useSelector((state) => state.game.pokemon);
+
+  // pass store down to each container
   return (
     <Routes>
       <Route

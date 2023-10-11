@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from '../components/Header.jsx';
 import Pokemon from '../components/Pokemon.jsx';
 import UserInput from '../components/UserInput.jsx';
+// Import hooks from react-redux
+import { useSelector, useDispatch } from 'react-redux';
+import { setScore, setHardmode, setPokemon } from '../redux/gameSlice';
 // import Bulbasaur from '../images/bulbasaur.png';
 
 /*
@@ -14,9 +17,13 @@ Holds Header, Pokemon, and User Input components.
 
 */
 
-// props coming from play.js
-const MainContainer = (props) => {
-  const { score, setScore, pokemon, setPokemon, hardmode, setHardmode } = props;
+const MainContainer = () => {
+  const dispatch = useDispatch();
+
+  // access state from the store
+  const score = useSelector((state) => state.game.score);
+  const pokemon = useSelector((state) => state.game.pokemon);
+  const hardmode = useSelector((state) => state.game.hardmode);
 
   // Fetch new pokemon from the database:
   const getNewPokemon = async () => {
@@ -32,7 +39,8 @@ const MainContainer = (props) => {
       });
       const getPokemon = await result.json();
 
-      setPokemon(getPokemon);
+      // Dispatch setPokemon action to update store
+      dispatch(setPokemon(getPokemon));
     } catch (error) {
       alert(`${error}: failed to load Pokemon`);
     }
@@ -45,11 +53,11 @@ const MainContainer = (props) => {
         pokemon={pokemon}
         getNewPokemon={getNewPokemon}
         hardmode={hardmode}
-        setHardmode={setHardmode}
+        setHardmode={(value) => dispatch(setHardmode(value))}
       />
       <UserInput
         score={score}
-        setScore={setScore}
+        setScore={(value) => dispatch(setScore(value))}
         getNewPokemon={getNewPokemon}
         pokemon={pokemon}
       />
