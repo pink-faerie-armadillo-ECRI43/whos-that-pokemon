@@ -30,18 +30,18 @@ router.post('/login', userController.loginUser, (req, res) => {
 // the database with all of the pokemon names and image URLs. Note, you will need to provide your own
 // mongoDB connection URL.
 
-router.get('/fetch-and-store-pokemons', async (req, res) => {
-  try {
-    const pokemonDataList = await pokemonController.fetchPokemonData();
-    await Pokemon.create(pokemonDataList);
-    console.log(`Stored ${pokemonDataList.length} Pokémon in the database.`);
-    res.json({
-      message: `Stored ${pokemonDataList.length} Pokémon in the database.`,
-    });
-  } catch (error) {
-    console.error(`Error fetching/storing data for Pokémon: ${error.message}`);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+// router.get('/fetch-and-store-pokemons', async (req, res) => {
+//   try {
+//     const pokemonDataList = await pokemonController.fetchPokemonData();
+//     await Pokemon.create(pokemonDataList);
+//     console.log(`Stored ${pokemonDataList.length} Pokémon in the database.`);
+//     res.json({
+//       message: `Stored ${pokemonDataList.length} Pokémon in the database.`,
+//     });
+//   } catch (error) {
+//     console.error(`Error fetching/storing data for Pokémon: ${error.message}`);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
 
 module.exports = router;
