@@ -2,6 +2,7 @@ const express = require('express');
 const pokemonController = require('../controllers/pokemonController');
 const userController = require('../controllers/userController');
 const { Pokemon } = require('../models/pokemonModels');
+const cookieController = require('../controllers/cookieController');
 
 const router = express.Router();
 router.use(express.json());
@@ -20,9 +21,14 @@ router.post('/signup', userController.createUser, (req, res) => {
 
 // Route to handle user login using the loginUser middleware from userController.
 // Returns a JSON response indicating that the user is logged in.
-router.post('/login', userController.loginUser, (req, res) => {
-  return res.status(200).json('User is logged in');
-});
+router.post(
+  '/login',
+  userController.loginUser,
+  cookieController.setSSIDCookie,
+  (req, res) => {
+    return res.status(200).json('User is logged in');
+  }
+);
 
 // This router is designed to populate your database. It looks unconventional, but it does work.
 // Essentially, the router calls our middleware function, fetchPokemonData, to populate an array
@@ -30,18 +36,19 @@ router.post('/login', userController.loginUser, (req, res) => {
 // the database with all of the pokemon names and image URLs. Note, you will need to provide your own
 // mongoDB connection URL.
 
-// router.get('/fetch-and-store-pokemons', async (req, res) => {
-//   try {
-//     const pokemonDataList = await pokemonController.fetchPokemonData();
-//     await Pokemon.create(pokemonDataList);
-//     console.log(`Stored ${pokemonDataList.length} Pokémon in the database.`);
-//     res.json({
-//       message: `Stored ${pokemonDataList.length} Pokémon in the database.`,
-//     });
-//   } catch (error) {
-//     console.error(`Error fetching/storing data for Pokémon: ${error.message}`);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
+router.get('/fetch-and-store-pokemons', async (req, res) => {
+  try {
+    const pokemonDataList = await pokemonController.fetchPokemonData();
+    console.log(pokemonDataList);
+    await Pokemon.create(pokemonDataList);
+    console.log(`Stored ${pokemonDataList.length} Pokémon in the database.`);
+    res.json({
+      message: `Stored ${pokemonDataList.length} Pokémon in the database.`,
+    });
+  } catch (error) {
+    console.error(`Error fetching/storing data for Pokémon: ${error.message}`);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 module.exports = router;

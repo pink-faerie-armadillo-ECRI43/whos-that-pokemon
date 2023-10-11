@@ -1,4 +1,4 @@
-const { User } = require('../models/pokemonModels');
+const { User } = require('../models/userModels');
 const fetch = require('node-fetch');
 const bcrypt = require('bcrypt');
 
