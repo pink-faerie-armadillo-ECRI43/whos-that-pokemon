@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setScore, setPokemon } from '../redux/gameSlice';
+import { setScore, setPokemon, setRound } from '../redux/gameSlice';
+import { setHighScore } from '../redux/userSlice';
 
 const UserInput = () => {
   const dispatch = useDispatch();
@@ -8,21 +9,30 @@ const UserInput = () => {
   // access state from store
   const score = useSelector((state) => state.game.score);
   const pokemon = useSelector((state) => state.game.pokemon);
+  const round = useSelector((state) => state.game.round);
+  const highScore = useSelector((state) => state.user.highScore);
 
   // upon user submission, checks to see if submitted answer is correct
   // if correct it will alert and increment score
   // if incorrect it will alert with correct answer
   // will render new pokemon either way by calling getNewPokemon
   // Function to check the user's answer
-  const checkAnswer = (e) => {
+  const checkAnswer = async (e) => {
     e.preventDefault();
     const answer = e.target[0].value;
+    dispatch(setRound(round + 1));
 
     if (answer.toLowerCase() === pokemon.name) {
+      const newScore = score + 1;
       alert('Correct! Well done!');
       // Increment the score and set it in the store
-      const newScore = score + 1;
+      console.log('new score', newScore);
       dispatch(setScore(newScore));
+      if (newScore > highScore) {
+        console.log('updating high score state');
+        dispatch(setHighScore(newScore));
+        console.log('high score state', highScore);
+      }
       e.target.reset();
     } else {
       alert(`Incorrect! The correct answer was ${pokemon.name}.`);
