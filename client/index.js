@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import App from './App.jsx';
 import Home from './components/Home.jsx'
 import SignUp from './components/SignUp.jsx';
-import LeaderBoard from './components/LeaderBoard.jsx';
+import LeaderBoard from './components/Leaderboard Components/LeaderBoard.jsx';
 
 import styles from '../public/styleSheet.css';
 
