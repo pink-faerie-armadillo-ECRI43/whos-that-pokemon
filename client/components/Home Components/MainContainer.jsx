@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Header from '../components/Header.jsx';
-import Pokemon from '../components/Pokemon.jsx';
-import UserInput from '../components/UserInput.jsx';
+import Header from './Header.jsx';
+import Pokemon from './Pokemon.jsx';
+import UserInput from './UserInput.jsx';
 // import Bulbasaur from '../images/bulbasaur.png';
 
 /*
