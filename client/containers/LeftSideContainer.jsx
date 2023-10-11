@@ -17,23 +17,7 @@ const LeftSideContainer = (props) => {
   const score = useSelector((state) => state.game.score);
   const pokemon = useSelector((state) => state.game.pokemon);
   const currentUser = useSelector((state) => state.user);
-
-  useEffect(async () => {
-    //if score > currentUser.highScore
-    //post request to update user's high score to /pokemon/leaderboard/:name
-    if (score > currentUser.highScore) {
-      const response = await fetch(
-        `/pokemon/leaderboard/${currentUser.username}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-          body: { highScore: score },
-        }
-      );
-    }
-  }, [score]);
+  const lives = useSelector((state) => state.game.lives);
 
   //This condition hides the score if no pokemon has been fetched.
   if (!pokemon.imageURL) {
@@ -42,11 +26,12 @@ const LeftSideContainer = (props) => {
 
   return (
     <div id='LeftSideContainer'>
+      <h2 className='lives'>Lives: {lives}</h2>
       <h2 className='score' data-testid='score'>
         Score: {score}
       </h2>
       <h2 className='score' data-testid='highscore'>
-        Highscore: {highScore}
+        Highscore: {currentUser.highScore}
       </h2>
     </div>
   );
