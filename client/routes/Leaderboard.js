@@ -20,7 +20,8 @@ const Leaderboard = () => {
     const response = await fetch(
       `/pokemon/leaderboard/${currentUser.username}`
     );
-    DBScore = response.json();
+    response = response.json();
+    DBScore = response.highScore;
   };
   const updateDBScore = async () => {
     //if score > currentUser.highScore

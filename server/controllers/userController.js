@@ -98,9 +98,10 @@ userController.getLeaderboard = async (req, res, next) => {
 
 userController.getHighScore = async (req, res, next) => {
   try {
-    const { name } = req.params;
+    const { id } = req.params;
+    console.log(req.params);
     //get highscore of user matching username
-    let highScore = await User.findOne({ username: name }, 'highScore');
+    let highScore = await User.findOne({ username: id }, 'highScore');
     //save onto res.locals.highScore
     res.locals.highScore = highScore;
     return next();
