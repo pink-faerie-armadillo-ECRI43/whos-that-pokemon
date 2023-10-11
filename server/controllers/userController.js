@@ -27,63 +27,39 @@ userController.createUser = async (req, res, next) => {
 * the appropriate user in the database, and then authenticate the submitted password
 * against the password stored in the database.
 */
-userController.verifyUser = (req, res, next) => {
+userController.verifyUser = async (req, res, next) => {
   try {
-    const {username, password} = req.body;
-    User.findOne({username: username})
-      .then(async (user) => {
-        if (user.length > 0) {
-          const result = await bcrypt.compare(password, user[0].password)
-          if (result === true) {
-            console.log('User found:', user[0]);
-            res.locals.user = user[0];
-            return next();
-          }
-        }
-        // console.log('test');
-        return res.redirect('/signup');
+    // deconstruct request body for credentials
+    const { username , password } = req.body;
+    // look up user in DB
+    const user = await User.findOne( { username: username } )
+    // handle uknown user with global error handler
+    if (user === null) return next({
+      log: 'User not found userController.loginUser middleware.',
+      status: 500,
+      message: 'User validation failed.'
+    })
+    // compare password in db to password provided by user
+    const result = await bcrypt.compare(password, user.password);
+    // if password matches, continue to next middleware function
+    if (result === true) {
+      res.locals.user = user;
+      return next();
+    } else { // else, throw global error handler
+      return next({
+        log: 'Password doesnt match userController.loginUser middleware.',
+        status: 500,
+        message: 'User validation failed.'
       })
+    }
   }
   catch (err) {
-    return next(err);
+    return next({
+      log: 'Error in userController.loginUser middleware.',
+      status: 500,
+      message: 'Unable to login at this time.'
+    });
   }
 };
-
-// loginUser takes the req.body and compares the username against what appears in the db.
-// If the username exists, it then does a check to see if the password provided checks with
-// the bcrypted password stored in the db. If either the username or passwrod don't check out,
-// it gives a generic response, but logs whether it was an incorrect username or password in
-// the terminal. 
-// userController.loginUser = async (req, res, next) => {
-//     try {
-//         const { username, password } = req.body;
-//         const existingUser = await User.findOne({username: username});
-//         if (existingUser) {
-//             const result = await bcrypt.compare(password, existingUser.password);
-//             if (result) {
-//                 res.locals.existingUser = existingUser;
-//                 return next();
-//             } else {
-//                 return next({
-//                     log: 'Incorrect paswword.',
-//                     status: 401,
-//                     message: 'Incorrect user name or password.'
-//                 })
-//             }            
-//         } else {
-//             return next({
-//                 log: 'Incorrect username.',
-//                 status: 401,
-//                 message: 'Incorrect user name or password.'
-//             })
-//         }
-//     } catch (err) {
-//         return next({
-//             log: 'Error in userController.loginUser middleware.',
-//             status: 500,
-//             message: 'Unable to login at this time.'
-//         })
-//     }
-// }
 
 module.exports = userController;

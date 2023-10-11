@@ -1,8 +1,7 @@
 const express = require('express');
 const pokemonController = require('../controllers/pokemonController');
-const userController = require('../controllers/userController');
+const sessionController = require('../controllers/sessionController');
 const leaderboardController = require('../controllers/leaderboardController')
-const Pokemon = require('../models/pokemonModels');
 
 
 const router = express.Router();
@@ -10,15 +9,13 @@ router.use(express.json())
 
 //Route to retieve random pokemon data using the getpokemon middleware from pokemon controller
 //Returns the json responce containing the random pokemon data
-router.get('/', pokemonController.getPokemon, (req, res) => {
+router.get('/', sessionController.isLoggedIn, pokemonController.getPokemon, (req, res) => {
   return res.status(200).json(res.locals.randomPokemon);
 });
 
+router.get('/leaderboard', sessionController.isLoggedIn, leaderboardController.getHighScores);
 
-
-router.get('/leaderboard', leaderboardController.getHighScores);
-
-router.patch('/leaderboard', leaderboardController.getUserAndUpdate, (req, res) => {
+router.patch('/leaderboard', sessionController.isLoggedIn, leaderboardController.getUserAndUpdate, (req, res) => {
   return res.status(200).json({username: res.locals.username});
 })
 // This router is designed to populate your database. It looks unconventional, but it does work.
