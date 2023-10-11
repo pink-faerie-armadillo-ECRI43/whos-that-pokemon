@@ -12,6 +12,7 @@ const Play = ({
   setHardmode,
   pokemon,
   setPokemon,
+  setHighScore,
 }) => {
   return (
     <div id='app'>
@@ -19,6 +20,7 @@ const Play = ({
         currentUser={currentUser}
         score={score}
         pokemon={pokemon}
+        setHighScore={setHighScore}
       />
       <MainContainer
         pokemon={pokemon}

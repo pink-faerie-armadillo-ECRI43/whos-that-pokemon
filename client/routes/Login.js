@@ -19,10 +19,8 @@ const Login = ({ currentUser, setCurrentUser }) => {
       body: body,
     });
     //save result into currentUser state for later use... stretch features?
-    console.log('I am not here');
     const user = await response.json();
     if (response.status === 200) {
-      console.log('I am here');
       setCurrentUser(user);
     }
   };
@@ -50,7 +48,7 @@ const Login = ({ currentUser, setCurrentUser }) => {
     }
   };
 
-  if (currentUser.success) {
+  if (currentUser.verified) {
     return <Navigate replace to='/play' />;
   } else {
     return (

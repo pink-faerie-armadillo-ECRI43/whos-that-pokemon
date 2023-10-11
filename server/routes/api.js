@@ -26,7 +26,7 @@ router.post(
   userController.loginUser,
   cookieController.setSSIDCookie,
   (req, res) => {
-    console.log(res.locals.existingUser);
+    console.log('login response body',res.locals.existingUser);
     return res.status(200).json(res.locals.existingUser);
   }
 );

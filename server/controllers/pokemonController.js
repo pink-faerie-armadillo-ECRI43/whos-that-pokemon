@@ -28,7 +28,7 @@ pokemonController.getPokemon = async (req, res, next) => {
 // which include a name property and a image URL. The function returns the pokemonDataList.
 
 pokemonController.fetchPokemonData = async (req, res, next) => {
-  const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=600');
+  const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=5');
   const data = await response.json();
   // console.log('data: ', data);
   const pokemonList = data.results;

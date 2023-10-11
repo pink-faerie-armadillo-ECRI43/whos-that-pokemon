@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { setScore } from '../redux/gameSlice';
+import { setUser, setHighScore } from '../redux/userSlice';
 
 /*
 
@@ -12,34 +13,14 @@ Displays high score and current score (which User Input resets to 0 upon failing
 */
 
 // props coming from play.js
-const LeftSideContainer = (props) => {
-  const { currentUser, score, pokemon } = props;
-
-  useEffect(async () => {
-    //if score > currentUser.highScore
-    //post request to update user's high score to /pokemon/leaderboard/:name
-    if (score > currentUser.highScore) {
-      const response = await fetch(
-        `/pokemon/leaderboard/${currentUser.username}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-          body: { highScore: score },
-        }
-      );
-    }
-  }, [score]);
+const LeftSideContainer = () => {
   const score = useSelector((state) => state.game.score);
   const pokemon = useSelector((state) => state.game.pokemon);
+  const highScore = useSelector((state) => state.user.highScore);
 
   //This condition hides the score if no pokemon has been fetched.
   if (!pokemon.imageURL) {
     return <div id='LeftSideContainer' data-testid='leftContainer'></div>;
-  }
-  if (score > pokemon.highScore) {
-    dispatch(setScore(score));
   }
 
   return (
@@ -48,7 +29,7 @@ const LeftSideContainer = (props) => {
         Score: {score}
       </h2>
       <h2 className='score' data-testid='highscore'>
-        Highscore: {pokemon.highScore}
+        Highscore: {highScore}
       </h2>
     </div>
   );

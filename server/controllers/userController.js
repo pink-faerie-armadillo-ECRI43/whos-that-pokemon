@@ -43,18 +43,16 @@ userController.createUser = async (req, res, next) => {
 // the terminal.
 userController.loginUser = async (req, res, next) => {
   try {
-    console.log(req.body);
     const { username, password } = req.body;
     const existingUser = await User.findOne({ username: username });
     if (existingUser) {
       const result = await bcrypt.compare(password, existingUser.password);
       if (result) {
         res.locals.existingUser = {
-          success: true,
-          name: existingUser.username,
+          verified: true,
+          username: existingUser.username,
           highScore: existingUser.highScore,
         };
-        console.log('I am at userController');
         return next();
       } else {
         return next({
@@ -118,11 +116,13 @@ userController.getHighScore = async (req, res, next) => {
 userController.updateHighScore = async (req, res, next) => {
   try {
     //POST request wit body {highScore: (number)}
-    const { name } = req.params;
+    const { username } = req.params;
+    console.log(req.params);
     const newScore = req.body.highScore;
+    console.log(req.body);
     //get highscore of user matching user ID
     let updated = await User.findOneAndUpdate(
-      { username: name },
+      { username: username },
       { highScore: newScore },
       { new: true }
     );

@@ -14,7 +14,7 @@ mongoose.connection.once('open', () => {
 
 const Schema = mongoose.Schema;
 
-//Mongoose schema for User data with field sfor username and password
+//Mongoose schema for User data with fields for username and password
 const userSchema = new Schema({
   username: {
     type: String,

@@ -2,13 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   score: 0,
+  round: 0,
   hardmode: false,
   pokemon: {},
 };
 
-
 export const gameSlice = createSlice({
-
   name: 'game',
   initialState,
   reducers: {
@@ -21,8 +20,12 @@ export const gameSlice = createSlice({
     setPokemon: (state, action) => {
       state.pokemon = action.payload;
     },
+    setRound: (state, action) => {
+      state.round = action.payload;
+    },
   },
 });
 
-export const { setScore, setHardmode, setPokemon } = gameSlice.actions;
+export const { setScore, setHardmode, setPokemon, setRound } =
+  gameSlice.actions;
 export default gameSlice.reducer;
