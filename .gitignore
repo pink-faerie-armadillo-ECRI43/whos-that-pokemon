@@ -4,5 +4,5 @@ npm-debug.log
 .DS_Store
 build/*.html
 package-lock.json
-.env
+**/.env
 coverage/
