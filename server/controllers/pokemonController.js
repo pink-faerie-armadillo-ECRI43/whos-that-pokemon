@@ -1,7 +1,10 @@
 const { Pokemon } = require('../models/pokemonModels');
 const fetch = require('node-fetch');
+const fs = require('fs');
 
 const pokemonController = {};
+let writeLocation;
+let pokemonList;
 
 //Middleware to retrieve random pokemon from the databse.
 pokemonController.getPokemon = async (req, res, next) => {
