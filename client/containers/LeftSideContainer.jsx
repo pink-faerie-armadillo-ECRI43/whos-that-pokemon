@@ -13,7 +13,9 @@ Displays high score and current score (which User Input resets to 0 upon failing
 
 // props coming from play.js
 const LeftSideContainer = (props) => {
-  const { currentUser, score, pokemon } = props;
+  const { currentUser } = props;
+  const score = useSelector((state) => state.game.score);
+  const pokemon = useSelector((state) => state.game.pokemon);
 
   useEffect(async () => {
     //if score > currentUser.highScore
@@ -31,8 +33,6 @@ const LeftSideContainer = (props) => {
       );
     }
   }, [score]);
-  const score = useSelector((state) => state.game.score);
-  const pokemon = useSelector((state) => state.game.pokemon);
 
   //This condition hides the score if no pokemon has been fetched.
   if (!pokemon.imageURL) {
@@ -48,7 +48,7 @@ const LeftSideContainer = (props) => {
         Score: {score}
       </h2>
       <h2 className='score' data-testid='highscore'>
-        Highscore: {pokemon.highScore}
+        Highscore: {highScore}
       </h2>
     </div>
   );

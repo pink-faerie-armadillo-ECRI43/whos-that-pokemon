@@ -1,8 +1,9 @@
 import React, { useState } from 'react'; //no need to use usestate after changing to redux
+//importing react router stuff
+import { Routes, Route } from 'react-router';
+import Login from './routes/Login.js';
+import Play from './routes/Play.js';
 
-import MainContainer from './containers/MainContainer.jsx';
-import LeftSideContainer from './containers/LeftSideContainer.jsx';
-import RightSideContainer from './containers/RightSideContainer.jsx';
 // importing redux related stuff
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import { store } from './redux/store';
