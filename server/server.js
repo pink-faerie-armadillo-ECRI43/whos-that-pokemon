@@ -6,6 +6,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(__dirname + '/public/'));
 
+const PORT = 3000;
 //set up the router here for '/
 app.use('/pokemon', apiRouter);
 
@@ -23,6 +24,8 @@ app.use((err, req, res, next) => {
   console.log(errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
+
+app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
 
 //moved server start to start.js
 module.exports = app;
