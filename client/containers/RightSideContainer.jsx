@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { setHardmode } from '../redux/gameSlice';
 /*
 
 /////// RIGHT SIDE CONTAINER \\\\\\\
@@ -14,27 +15,32 @@ Holds our Game Options:
 
 */
 
-// props coming from play.js
-const RightSideContainer = (props) => {
-  const { hardmode, setHardmode, pokemon } = props;
+const RightSideContainer = () => {
+  const dispatch = useDispatch();
+
+  // access state from store
+  const hardmode = useSelector((state) => state.game.hardmode);
+  const pokemon = useSelector((state) => state.game.pokemon);
+
   //This functionality changes the state of Hardmode.
-  const onChangeValue = () => {
-    if (hardmode === false) {
-      setHardmode(true);
-    } else {
-      setHardmode(false);
-    }
+  const toggleHardmode = () => {
+    // Dispatch the setHardmode action to update store
+    dispatch(setHardmode(!hardmode));
   };
+
   // This condition hides the options until a pokemon is fetched.
   // if (!pokemon.imageURL) {
   //   return <div id='RightSideContainer' data-testid='rightContainer'></div>;
   // }
 
   return (
-    <div id='RightSideContainer' onChange={onChangeValue}>
-      <h1>Game Options</h1>
+    <div id='RightSideContainer' onChange={toggleHardmode}>
       <div id='HardmodeButton'>
-        <input type='checkbox' checked={hardmode === true} />
+        <input
+          type='checkbox'
+          checked={hardmode === true}
+          onChange={toggleHardmode}
+        />
         Hardmode
       </div>
     </div>

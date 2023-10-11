@@ -1,28 +1,48 @@
-import React, { useState } from 'react';
+import React from 'react';
 import playButton from '../images/playButton.png';
 import music from '../music/onplaymusic.mp3';
 
-// props coming from MainContainer.js
-const Pokemon = (props) => {
-  const { pokemon, getNewPokemon, hardmode, setHardmode } = props;
+import { useSelector, useDispatch } from 'react-redux';
+import { setPokemon } from '../redux/gameSlice';
+
+const Pokemon = () => {
+  const dispatch = useDispatch();
+
+  const pokemon = useSelector((state) => state.game.pokemon);
+  const hardmode = useSelector((state) => state.game.hardmode);
+
+  // Function to start a new game by fetching a new Pokemon
+  const startNewGame = async () => {
+    try {
+      const result = await fetch('/pokemon', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const newPokemon = await result.json();
+
+      // Dispatch the setPokemon action to update the store
+      dispatch(setPokemon(newPokemon));
+    } catch (error) {
+      alert(`${error}: failed to start a new game`);
+    }
+  };
 
   // when page first loads (pokemon = {}) serve static image as start button
   if (!pokemon.imageURL) {
     return (
-      // renders our playButton from images folder on start screen
       <div id='startScreen'>
-        <button id='playButton' onClick={getNewPokemon}>
+        <button id='playButton' onClick={startNewGame}>
           <img src={playButton} />
         </button>
       </div>
     );
   }
-  // checks if hardmode is false and loads appropriate image
-  // autoplay audio upon starting game, was working on adjusting volume, or maybe option for turning it on/off
+
+  // Check if hard mode is false and load the appropriate image
   if (hardmode === false) {
     return (
       <div id='pokemon'>
-        {/*<audio id='audio' src={music} autoPlay></audio>*/}
         <img src={pokemon.imageURL} />
       </div>
     );
