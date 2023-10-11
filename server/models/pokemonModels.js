@@ -5,8 +5,7 @@ const mongoose = require('mongoose');
 const mongoString =
   'mongodb+srv://hsweat:Ih1qfs1XX5lylqix@cluster0.mfqqgp1.mongodb.net/?retryWrites=true&w=majority';
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
-//Put custom uri info here
+
 const uri = mongoString;
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -22,23 +21,6 @@ const pokemonSchema = new Schema({
   imageURL: String,
 });
 
-//Mongoose schema for User data with field sfor username and password
-const userSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-});
-
 const Pokemon = mongoose.model('Pokemon', pokemonSchema);
-const User = mongoose.model('User', userSchema);
 
-module.exports = {
-  Pokemon,
-  User,
-};
+module.exports = Pokemon;
