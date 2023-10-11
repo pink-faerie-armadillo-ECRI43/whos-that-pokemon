@@ -43,7 +43,6 @@ userController.createUser = async (req, res, next) => {
 // the terminal.
 userController.loginUser = async (req, res, next) => {
   try {
-    console.log(req.body);
     const { username, password } = req.body;
     const existingUser = await User.findOne({ username: username });
     if (existingUser) {
@@ -54,7 +53,6 @@ userController.loginUser = async (req, res, next) => {
           username: existingUser.username,
           highScore: existingUser.highScore,
         };
-        console.log('I am at userController');
         return next();
       } else {
         return next({
@@ -119,9 +117,9 @@ userController.updateHighScore = async (req, res, next) => {
   try {
     //POST request wit body {highScore: (number)}
     const { username } = req.params;
-    consol.log(req.params)
+    console.log(req.params);
     const newScore = req.body.highScore;
-    console.log(req.body)
+    console.log(req.body);
     //get highscore of user matching user ID
     let updated = await User.findOneAndUpdate(
       { username: username },

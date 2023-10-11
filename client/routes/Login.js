@@ -19,10 +19,8 @@ const Login = ({ currentUser, setCurrentUser }) => {
       body: body,
     });
     //save result into currentUser state for later use... stretch features?
-    console.log('I am logging in');
     const user = await response.json();
     if (response.status === 200) {
-      console.log('I am logged in');
       setCurrentUser(user);
     }
   };

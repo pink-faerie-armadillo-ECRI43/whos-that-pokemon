@@ -16,7 +16,7 @@ export const userSlice = createSlice({
       state.verified = true;
     },
     setHighScore: (state, action) => {
-      state.highScore = action.payload.highScore;
+      state.highScore = action.payload;
     },
   },
 });

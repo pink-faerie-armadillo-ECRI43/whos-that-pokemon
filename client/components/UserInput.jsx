@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setScore, setPokemon, setRound } from '../redux/gameSlice';
 import { setHighScore } from '../redux/userSlice';
+import { Navigate } from 'react-router-dom';
 
 const UserInput = () => {
   const dispatch = useDispatch();
@@ -26,12 +27,9 @@ const UserInput = () => {
       const newScore = score + 1;
       alert('Correct! Well done!');
       // Increment the score and set it in the store
-      console.log('new score', newScore);
       dispatch(setScore(newScore));
       if (newScore > highScore) {
-        console.log('updating high score state');
         dispatch(setHighScore(newScore));
-        console.log('high score state', highScore);
       }
       e.target.reset();
     } else {
@@ -42,7 +40,10 @@ const UserInput = () => {
       e.target.reset();
     }
   };
-
+  // Only play 5ish rounds
+  if (round > 1) {
+    return <Navigate replace to='/leaderboard' />;
+  }
   // Only display the user submission form if a Pokemon image is on the screen
   if (!pokemon.imageURL) {
     return <div id='startPageNoInput'></div>;
