@@ -99,7 +99,6 @@ userController.getLeaderboard = async (req, res, next) => {
 userController.getHighScore = async (req, res, next) => {
   try {
     const { id } = req.params;
-    console.log(req.params);
     //get highscore of user matching username
     let highScore = await User.findOne({ username: id }, 'highScore');
     //save onto res.locals.highScore
@@ -117,13 +116,11 @@ userController.getHighScore = async (req, res, next) => {
 userController.updateHighScore = async (req, res, next) => {
   try {
     //POST request wit body {highScore: (number)}
-    const { username } = req.params;
-    console.log(req.params);
+    const { id } = req.params;
     const newScore = req.body.highScore;
-    console.log(req.body);
     //get highscore of user matching user ID
     let updated = await User.findOneAndUpdate(
-      { username: username },
+      { username: id },
       { highScore: newScore },
       { new: true }
     );

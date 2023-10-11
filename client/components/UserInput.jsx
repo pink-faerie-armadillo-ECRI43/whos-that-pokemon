@@ -1,16 +1,16 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setScore, setPokemon, setRound } from '../redux/gameSlice';
+import { setScore, setPokemon, setLives } from '../redux/gameSlice';
 import { setHighScore } from '../redux/userSlice';
 import { Navigate } from 'react-router-dom';
 
-const UserInput = () => {
+const UserInput = ({ getNewPokemon }) => {
   const dispatch = useDispatch();
 
   // access state from store
   const score = useSelector((state) => state.game.score);
   const pokemon = useSelector((state) => state.game.pokemon);
-  const round = useSelector((state) => state.game.round);
+  const lives = useSelector((state) => state.game.lives);
   const highScore = useSelector((state) => state.user.highScore);
 
   // upon user submission, checks to see if submitted answer is correct
@@ -21,27 +21,31 @@ const UserInput = () => {
   const checkAnswer = async (e) => {
     e.preventDefault();
     const answer = e.target[0].value;
-    dispatch(setRound(round + 1));
 
     if (answer.toLowerCase() === pokemon.name) {
       const newScore = score + 1;
       alert('Correct! Well done!');
       // Increment the score and set it in the store
       dispatch(setScore(newScore));
+      // check and set high score in state if needed
       if (newScore > highScore) {
         dispatch(setHighScore(newScore));
       }
+      // get new pokemon and set in state
+      getNewPokemon();
+      //clear input field
       e.target.reset();
     } else {
       alert(`Incorrect! The correct answer was ${pokemon.name}.`);
-      // Reset the score to 0 and fetch a new Pokemon
-      dispatch(setScore(0));
-      dispatch(setPokemon({})); // Clear the current Pokemon
+      dispatch(setLives(lives - 1));
+
+      // get new pokemon and set in state
+      getNewPokemon();
       e.target.reset();
     }
   };
-  // Only play 5ish rounds
-  if (round > 1) {
+  // When lives reaches zero, game over go to leaderboard round
+  if (lives === 0) {
     return <Navigate replace to='/leaderboard' />;
   }
   // Only display the user submission form if a Pokemon image is on the screen
