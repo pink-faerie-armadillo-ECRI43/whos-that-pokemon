@@ -43,12 +43,17 @@ userController.createUser = async (req, res, next) => {
 // the terminal.
 userController.loginUser = async (req, res, next) => {
   try {
+    console.log(req.body);
     const { username, password } = req.body;
     const existingUser = await User.findOne({ username: username });
     if (existingUser) {
       const result = await bcrypt.compare(password, existingUser.password);
       if (result) {
-        res.locals.existingUser = existingUser;
+        res.locals.existingUser = {
+          success: true,
+          name: existingUser.username,
+        };
+        console.log('I am at userController');
         return next();
       } else {
         return next({
