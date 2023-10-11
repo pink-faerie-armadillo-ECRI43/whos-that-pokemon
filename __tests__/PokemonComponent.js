@@ -1,4 +1,4 @@
-import Pokemon from '../client/components/Pokemon.jsx';
+import Pokemon from '../client/components/Home Components/Pokemon.jsx';
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 jest.mock('../images/playButton.png');
