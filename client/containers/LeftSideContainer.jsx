@@ -11,6 +11,7 @@ Displays high score and current score (which User Input resets to 0 upon failing
 
 */
 
+// props coming from play.js
 const LeftSideContainer = (props) => {
   const score = useSelector((state) => state.game.score);
   const pokemon = useSelector((state) => state.game.pokemon);

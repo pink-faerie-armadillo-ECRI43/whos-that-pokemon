@@ -29,9 +29,9 @@ const RightSideContainer = () => {
   };
 
   // This condition hides the options until a pokemon is fetched.
-  if (!pokemon.imageURL) {
-    return <div id='RightSideContainer' data-testid='rightContainer'></div>;
-  }
+  // if (!pokemon.imageURL) {
+  //   return <div id='RightSideContainer' data-testid='rightContainer'></div>;
+  // }
 
   return (
     <div id='RightSideContainer' onChange={toggleHardmode}>
