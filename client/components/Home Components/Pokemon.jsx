@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import playButton from '../images/playButton.png';
-// import music from '../music/onplaymusic.mp3';
+import playButton from '../../images/playButton.png';
+// import music from '../../music/onplaymusic.mp3';
 
 const Pokemon = (props) => {
   const { pokemon, getNewPokemon, hardmode, setHardmode } = props;
@@ -11,7 +11,7 @@ const Pokemon = (props) => {
       // renders our playButton from images folder on start screen
       <div id='startScreen'>
         <button id='playButton' onClick={getNewPokemon}>
-          <img className = 'playButton' src={playButton} />
+          <img className='playButton' src={playButton} />
         </button>
       </div>
     );
