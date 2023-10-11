@@ -14,6 +14,7 @@ Holds Header, Pokemon, and User Input components.
 
 */
 
+// props coming from play.js
 const MainContainer = (props) => {
   const { score, setScore, pokemon, setPokemon, hardmode, setHardmode } = props;
 
