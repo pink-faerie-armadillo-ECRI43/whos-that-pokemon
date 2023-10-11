@@ -28,4 +28,7 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
 
 //moved server start to start.js
+const PORT = 3000;
+
+app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
 module.exports = app;
