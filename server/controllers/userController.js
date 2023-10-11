@@ -111,6 +111,7 @@ userController.getHighScore = async (req, res, next) => {
 
 userController.updateHighScore = async (req, res, next) => {
   try {
+    //POST request wit body {highScore: (number)}
     const { id } = req.params;
     const newScore = req.body.highScore;
     //get highscore of user matching user ID
