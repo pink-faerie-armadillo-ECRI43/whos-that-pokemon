@@ -55,6 +55,7 @@ module.exports = {
     },
     proxy: {
       '/pokemon': 'http://localhost:3000/',
+      '/user': 'http://localhost:3000/'
       // '/api/**': ''
       // {
       //     target: 'http://localhost:3000/',
