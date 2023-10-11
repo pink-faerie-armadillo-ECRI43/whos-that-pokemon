@@ -4,7 +4,7 @@ import LeftSideContainer from './containers/LeftSideContainer.jsx';
 import RightSideContainer from './containers/RightSideContainer.jsx';
 // importing redux related stuff
 import { Provider, useSelector, useDispatch } from 'react-redux';
-import store from './redux/store';
+import { store } from './redux/store';
 import { setScore, setHardmode, setPokemon } from './redux/gameSlice';
 
 const App = () => {
@@ -30,13 +30,11 @@ const App = () => {
 
   // pass store down to each container
   return (
-    <Provider store={store}>
-      <div id='app'>
-        <LeftSideContainer />
-        <MainContainer />
-        <RightSideContainer />
-      </div>
-    </Provider>
+    <div id='app'>
+      <LeftSideContainer />
+      <MainContainer />
+      <RightSideContainer />
+    </div>
   );
 };
 

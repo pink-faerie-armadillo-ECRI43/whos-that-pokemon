@@ -6,7 +6,7 @@ const initialState = {
   pokemon: {},
 };
 
-const gameSlice = createSlice({
+export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
