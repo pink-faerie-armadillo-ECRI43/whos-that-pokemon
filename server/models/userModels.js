@@ -14,16 +14,25 @@ mongoose.connection.once('open', () => {
 
 const Schema = mongoose.Schema;
 
-//Mongoose schema for pokemon data with fields for name and imageURL
-const pokemonSchema = new Schema({
-  name: String,
-  imageURL: String,
-  game_indices: Array,
-  types: Array,
+//Mongoose schema for User data with field sfor username and password
+const userSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  highScore: {
+    type: Number,
+    default: 0,
+  },
 });
 
-const Pokemon = mongoose.model('Pokemon', pokemonSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = {
-  Pokemon,
+  User,
 };

@@ -6,6 +6,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(__dirname + '/public/'));
 
+const PORT = 3000;
 //set up the router here for '/
 app.use('/pokemon', apiRouter);
 
