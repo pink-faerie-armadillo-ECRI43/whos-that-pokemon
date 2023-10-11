@@ -8,7 +8,7 @@ router.use(express.json())
 
 // Route to handle user registration using the createUser middleware from userController.
 router.post('/signup', userController.createUser, cookieController.setSSIDCookie, sessionController.startSession, (req, res) => {
-  return res.status(200).json('createUser Route');
+  return res.status(200).json(res.locals.user);
 })
 
 // Route to handle user login using the loginUser middleware from userController.
