@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import playButton from '../../images/playButton.png';
 // import music from '../../music/onplaymusic.mp3';
+import Timer from './Timer.jsx';
 
 const Pokemon = (props) => {
-  const { pokemon, getNewPokemon, hardmode, setHardmode } = props;
+  const { pokemon, getNewPokemon, hardmode, setHardmode, remainingTime, setRemainingTime, score, setScore } = props;
   console.log(pokemon.name);
   // when page first loads (pokemon = {}) serve static image as start button
   if (!pokemon.imageURL) {
@@ -21,6 +22,12 @@ const Pokemon = (props) => {
   if (hardmode === false) {
     return (
       <div id='pokemon'>
+        <Timer
+          remainingTime={remainingTime}
+          setRemainingTime={setRemainingTime}
+          getNewPokemon={getNewPokemon}
+          setScore={setScore}
+        />
         {/* <audio id='audio' src={music} autoPlay></audio> */}
         <img className='pokemon' src={pokemon.imageURL} />
       </div>
@@ -28,6 +35,12 @@ const Pokemon = (props) => {
   } else {
     return (
       <div id='pokemon'>
+        <Timer
+          remainingTime={remainingTime}
+          setRemainingTime={setRemainingTime}
+          getNewPokemon={getNewPokemon}
+          setScore={setScore}
+        />
         {/* <audio id='audio' src={music} autoPlay></audio> */}
         <img id='pokemonImage' src={pokemon.imageURL} />
       </div>
