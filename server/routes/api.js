@@ -15,7 +15,7 @@ router.get('/', sessionController.isLoggedIn, pokemonController.getPokemon, (req
 
 router.get('/leaderboard', sessionController.isLoggedIn, leaderboardController.getHighScores);
 
-router.patch('/leaderboard', sessionController.isLoggedIn, leaderboardController.getUserAndUpdate, (req, res) => {
+router.patch('/userHighScore', sessionController.isLoggedIn, leaderboardController.getUserAndUpdate, (req, res) => {
   return res.status(200).json({username: res.locals.username});
 })
 // This router is designed to populate your database. It looks unconventional, but it does work.

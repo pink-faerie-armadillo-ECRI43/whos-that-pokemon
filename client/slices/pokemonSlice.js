@@ -6,7 +6,7 @@ const initialState = {
   highScores: [
     {
       userName: '',
-      score: '',
+      userHighScore: '',
     },
   ],
 };
@@ -18,10 +18,13 @@ export const pokemonSlice = createSlice({
     updateUser: (state, action) => {
       state.userInfo = action.payload;
     },
+    updateLeaderBoard: (state, action) => {
+      state.highScores = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { updateUser } = pokemonSlice.actions;
+export const { updateUser, updateLeaderBoard } = pokemonSlice.actions;
 
 export default pokemonSlice.reducer;

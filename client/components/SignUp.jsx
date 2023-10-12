@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '../slices/pokemonSlice.js';
 import UserInfoInput from './LogIn-SignUp Components/UserInfoInput.jsx';
+import NavBar from './NavBar.jsx';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -56,7 +57,8 @@ const SignUp = () => {
   };
 
   return (
-    <div id='app'>
+    <div>
+      <NavBar />
       <UserInfoInput
         username={username}
         password={password}
@@ -66,7 +68,6 @@ const SignUp = () => {
       <button onClick={(event) => signUp(event, username, password)}>
         Sign Up
       </button>
-      <button onClick={() => navigate('/')}>Sign In</button>
     </div>
   );
 };

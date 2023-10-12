@@ -54,12 +54,59 @@ userController.verifyUser = async (req, res, next) => {
     }
   }
   catch (err) {
+    return next(err);
+  }
+};
+
+userController.deleteUser = async (req, res, next) =>{
+  try{
+    const username = req.body.username;
+    await User.findOneAndDelete({username});
+    return next();
+  } catch (err){
     return next({
-      log: 'Error in userController.loginUser middleware.',
-      status: 500,
-      message: 'Unable to login at this time.'
+      log: 'Error caught in deleteUser middleware',
+      status:400,
+      message: {err: 'Cannot delete student'}
     });
   }
 };
+
+// loginUser takes the req.body and compares the username against what appears in the db.
+// If the username exists, it then does a check to see if the password provided checks with
+// the bcrypted password stored in the db. If either the username or passwrod don't check out,
+// it gives a generic response, but logs whether it was an incorrect username or password in
+// the terminal. 
+// userController.loginUser = async (req, res, next) => {
+//     try {
+//         const { username, password } = req.body;
+//         const existingUser = await User.findOne({username: username});
+//         if (existingUser) {
+//             const result = await bcrypt.compare(password, existingUser.password);
+//             if (result) {
+//                 res.locals.existingUser = existingUser;
+//                 return next();
+//             } else {
+//                 return next({
+//                     log: 'Incorrect paswword.',
+//                     status: 401,
+//                     message: 'Incorrect user name or password.'
+//                 })
+//             }            
+//         } else {
+//             return next({
+//                 log: 'Incorrect username.',
+//                 status: 401,
+//                 message: 'Incorrect user name or password.'
+//             })
+//         }
+//     } catch (err) {
+//         return next({
+//             log: 'Error in userController.loginUser middleware.',
+//             status: 500,
+//             message: 'Unable to login at this time.'
+//         })
+//     }
+// }
 
 module.exports = userController;
