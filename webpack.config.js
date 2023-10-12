@@ -29,12 +29,8 @@ module.exports = {
         type: 'asset/resource',
       },
       {
-        test: /\.css?/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-          //   { loader: 'sass-loader' },
-        ],
+        test: /\.s[ac]ss$/i,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },
@@ -56,7 +52,7 @@ module.exports = {
     },
     proxy: {
       '/pokemon': 'http://localhost:3000/',
-      '/user': 'http://localhost:3000/'
+      '/user': 'http://localhost:3000/',
     },
     historyApiFallback: true,
   },
