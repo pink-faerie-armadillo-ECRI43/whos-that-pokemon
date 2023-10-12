@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '../../slices/pokemonSlice';
 
 const UserInput = (props) => {
-  const { score, setScore, getNewPokemon, pokemon, remainingTime, setRemainingTime, CountdownTimer } = props;
+  const { score, setScore, getNewPokemon, pokemon } = props;
 
   const dispatch = useDispatch();
   const username = useSelector((state) => state.pokemon.userInfo.username);
@@ -51,36 +51,15 @@ const UserInput = (props) => {
       alert('Correct! Well done!');
       setScore(score + 1);
       getNewPokemon();
-    
-      setRemainingTime(17);
-      CountdownTimer();
-
       e.target.reset();
     } else {
-
-      alert(`Incorrect! The correct answer was ${pokemon.name}. Restart game?`);
+      alert(`Incorrect! The correct answer was ${pokemon.name}.`);
       if (score > userHighScore) {
         handleHighScoreUpdate(score);
       }
-
       setScore(0);
       getNewPokemon();
-      
-      setRemainingTime(17)
-      CountdownTimer();
-
       e.target.reset();
-    // } else if (remainingTime === 0) {
-    //   alert(`Times up! Restart the game?`);
-    //   setScore(0);
-    //   getNewPokemon();
-      
-    //   setRemainingTime(8)
-    //   timedOut();
-      
-      
-
-    //   e.target.reset();
     }
   };
 
