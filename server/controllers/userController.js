@@ -49,6 +49,20 @@ userController.verifyUser = (req, res, next) => {
   }
 };
 
+userController.deleteUser = async (req, res, next) =>{
+  try{
+    const username = req.body.username;
+    await User.findOneAndDelete({username});
+    return next();
+  } catch (err){
+    return next({
+      log: 'Error caught in deleteUser middleware',
+      status:400,
+      message: {err: 'Cannot delete student'}
+    });
+  }
+};
+
 // loginUser takes the req.body and compares the username against what appears in the db.
 // If the username exists, it then does a check to see if the password provided checks with
 // the bcrypted password stored in the db. If either the username or passwrod don't check out,

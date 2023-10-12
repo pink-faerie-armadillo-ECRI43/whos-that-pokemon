@@ -11,6 +11,9 @@ router.post('/signup', userController.createUser, cookieController.setSSIDCookie
   return res.status(200).json(res.locals.user);
 })
 
+router.delete('/delete' , userController.deleteUser, (req, res) => {
+  return res.status(200).json({username: res.locals.username});
+});
 // Route to handle user login using the loginUser middleware from userController.
 // Returns a JSON response indicating that the user is logged in.
 // router.post('/login', userController.loginUser, (req, res) => {
