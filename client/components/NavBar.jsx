@@ -94,7 +94,7 @@ function NavBar() {
               textDecoration: 'none',
             }}
           >
-            Who's that Pokemon
+            Who's That Pokemon
           </Typography>
           <Box
             sx={{
