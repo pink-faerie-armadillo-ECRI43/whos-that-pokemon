@@ -25,9 +25,9 @@ pokemonController.getPokemon = async (req, res, next) => {
 // which include a name property and a image URL. The function returns the pokemonDataList.
 
 // pokemonController.fetchPokemonData = async (req, res, next) => {
-//     const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1017');
+//     const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=116&offset=905');
 //     const data = await response.json();
-//     // console.log('data: ', data);
+//      console.log('data: ', data);
 //     const pokemonList = data.results;
   
 //     const pokemonDataList = [];
@@ -38,9 +38,12 @@ pokemonController.getPokemon = async (req, res, next) => {
 //         name: pokemon.name,
 //         imageURL: pokemonDetails.sprites.other['official-artwork'].front_default,
 //       };
+//       console.log(pokemonData);
 //       pokemonDataList.push(pokemonData);
 //     }
 //     return pokemonDataList;
 // }
+
+
 
 module.exports = pokemonController;

@@ -18,6 +18,10 @@ router.get('/', pokemonController.getPokemon, (req, res) => {
 
 router.get('/leaderboard', leaderboardController.getHighScores);
 
+router.get('/userHighScore', userController.getUserHighScore, (req, res) =>{
+  return res.status(200).json({username: res.locals.username})
+});
+
 router.patch('/userHighScore', leaderboardController.getUserAndUpdate, (req, res) => {
   return res.status(200).json({username: res.locals.username});
 })
