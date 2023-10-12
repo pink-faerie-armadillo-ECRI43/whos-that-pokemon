@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   userInfo: { _id: '', username: '', userHighScore: '' },
-  authenticated: true,
+  authenticated: false,
   highScores: [
     {
       userName: '',
@@ -17,10 +17,12 @@ export const pokemonSlice = createSlice({
   reducers: {
     updateUser: (state, action) => {
       state.userInfo = action.payload;
+      state.authenticated = true;
     },
     resetUser: (state, action) => {
       const resetUser = { _id: '', username: '', userHighScore: '' };
       state.userInfo = resetUser;
+      state.authenticated = false;
     },
     updateLeaderBoard: (state, action) => {
       state.highScores = action.payload;
@@ -29,6 +31,7 @@ export const pokemonSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { updateUser, updateLeaderBoard, resetUser } = pokemonSlice.actions;
+export const { updateUser, updateLeaderBoard, resetUser } =
+  pokemonSlice.actions;
 
 export default pokemonSlice.reducer;

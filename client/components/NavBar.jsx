@@ -37,7 +37,7 @@ function NavBar() {
           alert('Unable to get leaderboard, error from server');
           return;
         }
-        dispatch(updateUser(data));
+        dispatch(updateLeaderBoard(data));
         navigate('/leaderBoard');
         return;
       })
@@ -106,8 +106,6 @@ function NavBar() {
             </Button>
             <Button
               onClick={(event) => handleLeaderBoard(event)}
-              // component={Link}
-              // to='/Leaderboard'
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
               Leaderboard
