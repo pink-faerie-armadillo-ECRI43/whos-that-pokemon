@@ -31,7 +31,7 @@ const LogIn = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log('data from sign-in fetch', data);
-        if ('err' in data) {
+        if (data === 'User validation failed.') {
           alert('Please sign up!');
           navigate('/signUp');
           return;

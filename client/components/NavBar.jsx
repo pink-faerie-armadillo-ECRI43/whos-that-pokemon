@@ -62,7 +62,7 @@ function NavBar() {
       .then((data) => {
         console.log('data from logOut fetch', data);
         if ('err' in data || 'error' in data) {
-          alert('Unable to get logOut, error from server');
+          alert('You are not signed in!');
           return;
         }
         dispatch(resetUser());
