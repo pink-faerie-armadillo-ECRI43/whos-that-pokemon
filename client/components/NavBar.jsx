@@ -14,11 +14,13 @@ import {
   resetUser,
 } from '../slices/pokemonSlice.js';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function NavBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const isAuthenticated = useSelector((state) => state.pokemon.authenticated);
 
   const handleLeaderBoard = (event) => {
     event.preventDefault();
@@ -83,11 +85,9 @@ function NavBar() {
           <Typography
             variant='h6'
             noWrap
-            component='a'
             sx={{
-              mr: 35,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              fontFamily: 'Shrikhand',
               fontWeight: 700,
               letterSpacing: '.2rem',
               color: 'inherit',
@@ -96,40 +96,57 @@ function NavBar() {
           >
             Who's that Pokemon
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <Button
-              component={Link}
-              to='/home'
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              Home
-            </Button>
-            <Button
-              onClick={(event) => handleLeaderBoard(event)}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              Leaderboard
-            </Button>
-            <Button
-              component={Link}
-              to='/signUp'
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              SignUp
-            </Button>
-            <Button
-              component={Link}
-              to='/'
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              LogIn
-            </Button>
-            <Button
-              onClick={(event) => handleLogOut(event)}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              Sign Out
-            </Button>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: {
+                xs: 'none',
+                md: 'flex',
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+              },
+            }}
+          >
+            {isAuthenticated ? (
+              <>
+                <Button
+                  component={Link}
+                  to='/home'
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Home
+                </Button>
+                <Button
+                  onClick={(event) => handleLeaderBoard(event)}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Leaderboard
+                </Button>
+                <Button
+                  onClick={(event) => handleLogOut(event)}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  component={Link}
+                  to='/'
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  LogIn
+                </Button>
+                <Button
+                  component={Link}
+                  to='/signUp'
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  SignUp
+                </Button>
+              </>
+            )}
           </Box>
         </Toolbar>
       </Container>

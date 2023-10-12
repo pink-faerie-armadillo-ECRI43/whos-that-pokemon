@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '../slices/pokemonSlice.js';
 import UserInfoInput from './LogIn-SignUp Components/UserInfoInput.jsx';
 import NavBar from './NavBar.jsx';
+import Button from '@mui/material/Button';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -59,15 +60,20 @@ const SignUp = () => {
   return (
     <div>
       <NavBar />
-      <UserInfoInput
-        username={username}
-        password={password}
-        handleUsernameChange={handleUsernameChange}
-        handlePasswordChange={handlePasswordChange}
-      />
-      <button onClick={(event) => signUp(event, username, password)}>
-        Sign Up
-      </button>
+      <div className='logInForm'>
+        <UserInfoInput
+          username={username}
+          password={password}
+          handleUsernameChange={handleUsernameChange}
+          handlePasswordChange={handlePasswordChange}
+        />
+        <Button
+          variant='contained'
+          onClick={(event) => signUp(event, username, password)}
+        >
+          Sign Up
+        </Button>
+      </div>
     </div>
   );
 };
