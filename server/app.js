@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const app = express();
 const apiRouter = require('./routes/api');
 const userRouter = require('./routes/userRouter');
@@ -6,6 +7,7 @@ const userRouter = require('./routes/userRouter');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(__dirname + '/public/'));
+app.use(cookieParser());
 
 //set up the router here for '/
 app.use('/pokemon', apiRouter);

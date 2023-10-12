@@ -1,20 +1,20 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import UserScores from './UserScores.jsx'
+import UserScores from './UserScores.jsx';
+import NavBar from '../NavBar.jsx';
 
 // THIS IS HOW YOU WOULD USE AN ACTION TO INVOKE SPECIFIC REDUCER METHOD
 // import { updateUser } from '../slices/pokemonSlice.js';
 // const dispatch = useDispatch();
-  // let response;
-  // dispatch(updateUser(response))
-
+// let response;
+// dispatch(updateUser(response))
 
 const LeaderBoard = () => {
   const highScores = useSelector((state) => state.pokemon.highScores);
 
   // // Test array
   // const testState = [{username: 'rick', score: '1'}, {username: 'rick', score: '2'}, {username: 'rick', score: '3'}, {username: 'rick', score: '4'}, {username: 'rick', score: '5'}]
-  
+
   // // logic to sort highScores state from object with hightest score to lowest score
   // for (let i = 0; i < testState.length; i++) {
   //   for (let j = 0; j < (testState.length - i - 1); j++) {
@@ -25,12 +25,12 @@ const LeaderBoard = () => {
   //       }
   //     }
   //   }
-  
+
   // // test components
   // const testNameArr = []
   // for (let i = 0; i < testState.length; i++) {
   //   testNameArr.push(
-  //     <UserScores 
+  //     <UserScores
   //       key = {i}
   //       username = {testState[i].username}
   //       // score = {testState[i].score}
@@ -41,7 +41,7 @@ const LeaderBoard = () => {
   // const testScoreArr = []
   // for (let i = 0; i < testState.length; i++) {
   //   testScoreArr.push(
-  //     <UserScores 
+  //     <UserScores
   //       key = {i}
   //       // username = {testState[i].username}
   //       score = {testState[i].score}
@@ -49,24 +49,27 @@ const LeaderBoard = () => {
   //   )
   // }
 
-
   return (
-  <div className='leaderboard-container'>
-    <h1>High Scores</h1>
+    <div className='leaderboard-container'>
+      <NavBar />
+      <h1>High Scores</h1>
       <div className='leaderboard-box'>
-       {highScores.map((el, idx) => <UserScores key={idx} username={el.username} score={el.userHighScore}/>)}
-          {/* <div className='high-score-user-name'>
+        {highScores.map((el, idx) => (
+          <UserScores
+            key={idx}
+            username={el.username}
+            score={el.userHighScore}
+          />
+        ))}
+        {/* <div className='high-score-user-name'>
             {testNameArr}
           </div>
           <div className='high-score-score'>
             {testScoreArr}
           </div> */}
       </div>
-  </div>
+    </div>
   );
 };
 
-
-
 export default LeaderBoard;
-
