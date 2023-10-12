@@ -4,8 +4,6 @@ import LeftSideContainer from './Home Components/LeftSideContainer.jsx';
 import RightSideContainer from './Home Components/RightSideContainer.jsx';
 import NavBar from './NavBar.jsx';
 
-
-
 const Home = () => {
   // initializing states
   const [score, setScore] = useState(0);
@@ -19,11 +17,7 @@ const Home = () => {
       <NavBar />
       <div id='app'>
         <LeftSideContainer score={score} pokemon={pokemon} />
-
         <MainContainer
-          remainingTime={remainingTime}
-          setRemainingTime={setRemainingTime}
-
           pokemon={pokemon}
           setPokemon={setPokemon}
           score={score}
