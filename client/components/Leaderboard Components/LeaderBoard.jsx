@@ -52,14 +52,20 @@ const LeaderBoard = () => {
   return (
     <div className='leaderboard-container'>
       <NavBar />
-      <div id="leaderboard-heading-container">
-        <h1 id="leaderboard-heading">High Scores</h1>
+      <div id='leaderboard-heading-container'>
+        <h1 id='leaderboard-heading'>High Scores</h1>
       </div>
-      
+
       <div className='leaderboard-box'>
+        <UserScores
+          number={'Rank'}
+          key={'rank'}
+          username={'Username'}
+          score={'Score'}
+        />
         {highScores.map((el, idx) => (
           <UserScores
-            number={idx+1}
+            number={idx + 1}
             key={idx}
             username={el.username}
             score={el.userHighScore}
