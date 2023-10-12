@@ -27,22 +27,31 @@ userController.createUser = async (req, res, next) => {
 * the appropriate user in the database, and then authenticate the submitted password
 * against the password stored in the database.
 */
-userController.verifyUser = (req, res, next) => {
+userController.verifyUser = async (req, res, next) => {
   try {
-    const {username, password} = req.body;
-    User.findOne({username: username})
-      .then(async (user) => {
-        if (user.length > 0) {
-          const result = await bcrypt.compare(password, user[0].password)
-          if (result === true) {
-            console.log('User found:', user[0]);
-            res.locals.user = user[0];
-            return next();
-          }
-        }
-        // console.log('test');
-        return res.redirect('/signup');
+    // deconstruct request body for credentials
+    const { username , password } = req.body;
+    // look up user in DB
+    const user = await User.findOne( { username: username } )
+    // handle uknown user with global error handler
+    if (user === null) return next({
+      log: 'User not found userController.loginUser middleware.',
+      status: 500,
+      message: 'User validation failed.'
+    })
+    // compare password in db to password provided by user
+    const result = await bcrypt.compare(password, user.password);
+    // if password matches, continue to next middleware function
+    if (result === true) {
+      res.locals.user = user;
+      return next();
+    } else { // else, throw global error handler
+      return next({
+        log: 'Password doesnt match userController.loginUser middleware.',
+        status: 500,
+        message: 'User validation failed.'
       })
+    }
   }
   catch (err) {
     return next(err);
