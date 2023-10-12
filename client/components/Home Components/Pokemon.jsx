@@ -4,6 +4,7 @@ import playButton from '../../images/playButton.png';
 import Timer from './Timer.jsx';
 
 const Pokemon = (props) => {
+
   const { pokemon, getNewPokemon, hardmode, setHardmode, remainingTime, setRemainingTime, score, setScore } = props;
 
   // when page first loads (pokemon = {}) serve static image as start button

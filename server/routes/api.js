@@ -2,7 +2,7 @@ const express = require('express');
 const pokemonController = require('../controllers/pokemonController');
 const sessionController = require('../controllers/sessionController');
 const leaderboardController = require('../controllers/leaderboardController')
-
+const userController = require('../controllers/userController')
 
 const router = express.Router();
 router.use(express.json())
@@ -15,7 +15,13 @@ router.get('/', sessionController.isLoggedIn, pokemonController.getPokemon, (req
 
 router.get('/leaderboard', sessionController.isLoggedIn, leaderboardController.getHighScores);
 
-router.patch('/userHighScore', sessionController.isLoggedIn, leaderboardController.getUserAndUpdate, (req, res) => {
+
+
+router.get('/userHighScore', userController.getUserHighScore, (req, res) =>{
+  return res.status(200).json({username: res.locals.username})
+});
+
+router.patch('/userHighScore', leaderboardController.getUserAndUpdate, (req, res) => {
   return res.status(200).json({username: res.locals.username});
 })
 // This router is designed to populate your database. It looks unconventional, but it does work.

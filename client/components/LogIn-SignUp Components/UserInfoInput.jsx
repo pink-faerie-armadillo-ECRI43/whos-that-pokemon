@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import TextField from '@mui/material/TextField';
 
 const UserInfoInput = (props) => {
   const { username, password, handleUsernameChange, handlePasswordChange } =
@@ -6,7 +7,34 @@ const UserInfoInput = (props) => {
 
   return (
     <>
-      <label className='userInput'>
+      <TextField
+        id='username'
+        label='Username'
+        variant='outlined'
+        autoComplete='off'
+        name='username'
+        type='string'
+        value={username}
+        onChange={(event) => handleUsernameChange(event)}
+        sx={{
+          mb: 1,
+        }}
+      />
+      <TextField
+        id='password'
+        label='Password'
+        type='password'
+        variant='outlined'
+        autoComplete='off'
+        name='password'
+        value={password}
+        onChange={(event) => handlePasswordChange(event)}
+        sx={{
+          mb: 1,
+        }}
+      />
+
+      {/* <label className='userInput'>
         Username:
         <input
           name='username'
@@ -24,7 +52,7 @@ const UserInfoInput = (props) => {
           value={password}
           onChange={(event) => handlePasswordChange(event)}
         />
-      </label>
+      </label> */}
     </>
   );
 };

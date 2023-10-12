@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '../slices/pokemonSlice.js';
 import UserInfoInput from './LogIn-SignUp Components/UserInfoInput.jsx';
 import NavBar from './NavBar.jsx';
+import Button from '@mui/material/Button';
 
 const LogIn = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const LogIn = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log('data from sign-in fetch', data);
-        if ('err' in data) {
+        if (data === 'User validation failed.') {
           alert('Please sign up!');
           navigate('/signUp');
           return;
@@ -62,15 +63,21 @@ const LogIn = () => {
   return (
     <div className='mainContain'>
       <NavBar />
-      <UserInfoInput
-        username={username}
-        password={password}
-        handleUsernameChange={handleUsernameChange}
-        handlePasswordChange={handlePasswordChange}
-      />
-      <button onClick={(event) => signIn(event, username, password)}>
-        Log In
-      </button>
+      <div className='logInForm'>
+        <UserInfoInput
+          username={username}
+          password={password}
+          handleUsernameChange={handleUsernameChange}
+          handlePasswordChange={handlePasswordChange}
+        />
+        <Button
+          variant='contained'
+          onClick={(event) => signIn(event, username, password)}
+          sx={{ backgroundColor: '#2c387e' }}
+        >
+          Log In
+        </Button>
+      </div>
     </div>
   );
 };

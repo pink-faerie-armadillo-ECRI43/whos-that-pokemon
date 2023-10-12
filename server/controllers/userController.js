@@ -58,6 +58,21 @@ userController.verifyUser = async (req, res, next) => {
   }
 };
 
+userController.getUserHighScore = async (req, res, next) => {
+  try{
+    const {username} = req.body
+    const user = await User.findOne({username});
+    const userHighScore = user.userHighScore;
+    res.status(200).json({userHighScore});
+  } catch(err) {
+    return next({
+      log: 'Error caught in getUserHighScore middleware',
+      status:400,
+      message: {err: 'Cannot get userHighSCore'}
+    });
+  }
+};
+
 userController.deleteUser = async (req, res, next) =>{
   try{
     const username = req.body.username;
