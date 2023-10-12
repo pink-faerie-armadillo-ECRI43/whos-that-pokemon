@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import UserScores from './UserScores.jsx';
 import NavBar from '../NavBar.jsx';
 
+
 // THIS IS HOW YOU WOULD USE AN ACTION TO INVOKE SPECIFIC REDUCER METHOD
 // import { updateUser } from '../slices/pokemonSlice.js';
 // const dispatch = useDispatch();
@@ -54,14 +55,10 @@ const LeaderBoard = () => {
       <NavBar />
       <h1>High Scores</h1>
       <div className='leaderboard-box'>
-        {highScores.map((el, idx) => (
-          <UserScores
-            key={idx}
-            username={el.username}
-            score={el.userHighScore}
-          />
-        ))}
-        {/* <div className='high-score-user-name'>
+
+          {highScores.map((el, idx) => <UserScores key={idx} username={el.username} score={el.userHighScore}/>)}
+          {/* <div className='high-score-user-name'>
+
             {testNameArr}
           </div>
           <div className='high-score-score'>
