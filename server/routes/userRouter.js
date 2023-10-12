@@ -20,4 +20,8 @@ router.post('/login', userController.verifyUser, cookieController.setSSIDCookie,
   return res.status(200).json(res.locals.user);
 })
 
+router.get('/logout', sessionController.isLoggedIn, sessionController.endSession, (req, res) => {
+  return res.status(200).json(res.locals.user);
+  });  
+
 module.exports = router;

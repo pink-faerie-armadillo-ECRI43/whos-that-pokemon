@@ -42,4 +42,24 @@ sessionController.startSession = async (req, res, next) => {
   }
 };
 
+/**
+* endSession - find and delete a user's Session from the database.
+*/
+sessionController.endSession = async (req, res, next) => {
+  try {
+  const session = await Session.findOneAndDelete( { cookieId: req.cookies.ssid } )
+  
+  
+  if (session === null) return next({
+  log: 'Session not found in endSession',
+  status: 500,
+  message: {err: 'session not found'}
+  })
+  return next();
+  }
+  catch (err) {
+  next(err);
+  }
+  };  
+
 module.exports = sessionController;
