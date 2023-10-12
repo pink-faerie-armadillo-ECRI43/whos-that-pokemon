@@ -8,13 +8,14 @@ const CountdownTimer = (props) => {
     useEffect(() => {
         const interval = setInterval(() => {
             if (remainingTime > 0) {
+                clearInterval(interval)
                 setRemainingTime(remainingTime - 1);
             } else  {
                 alert('Times up! Restart the game?')
                 setScore(0);
                 getNewPokemon()
                 clearInterval(interval);
-                setRemainingTime(17)
+                setRemainingTime(15)
             }    
         }, 1000);
         return () => clearInterval(interval);

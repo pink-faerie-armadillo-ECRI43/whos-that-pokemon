@@ -11,7 +11,7 @@ const Home = () => {
   const [score, setScore] = useState(0);
   const [hardmode, setHardmode] = useState(false);
   const [pokemon, setPokemon] = useState({});
-  const [remainingTime, setRemainingTime] = useState(17);
+  const [remainingTime, setRemainingTime] = useState(15);
 
   // set up each container and pass appropraite states down props chain
   return (

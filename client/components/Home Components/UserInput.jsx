@@ -51,10 +51,7 @@ const UserInput = (props) => {
       alert('Correct! Well done!');
       setScore(score + 1);
       getNewPokemon();
-    
-      setRemainingTime(17);
-      CountdownTimer();
-
+      setRemainingTime(15);
       e.target.reset();
     } else {
 
@@ -62,25 +59,10 @@ const UserInput = (props) => {
       if (score > userHighScore) {
         handleHighScoreUpdate(score);
       }
-
       setScore(0);
-      getNewPokemon();
-      
-      setRemainingTime(17)
-      CountdownTimer();
-
+      getNewPokemon();  
+      setRemainingTime(15)
       e.target.reset();
-    // } else if (remainingTime === 0) {
-    //   alert(`Times up! Restart the game?`);
-    //   setScore(0);
-    //   getNewPokemon();
-      
-    //   setRemainingTime(8)
-    //   timedOut();
-      
-      
-
-    //   e.target.reset();
     }
   };
 
