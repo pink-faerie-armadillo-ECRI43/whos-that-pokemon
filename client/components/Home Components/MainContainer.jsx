@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from './Header.jsx';
 import Pokemon from './Pokemon.jsx';
 import UserInput from './UserInput.jsx';
 // import Bulbasaur from '../images/bulbasaur.png';
-// import CountdownTimer from './Timer.jsx';
 
 /*
 
@@ -16,8 +15,7 @@ Holds Header, Pokemon, and User Input components.
 */
 
 const MainContainer = (props) => {
-  const { score, setScore, pokemon, setPokemon, hardmode, setHardmode, remainingTime, setRemainingTime } = props;
-
+  const { score, setScore, pokemon, setPokemon, hardmode, setHardmode } = props;
 
   // Fetch new pokemon from the database:
   const getNewPokemon = async () => {
@@ -39,70 +37,16 @@ const MainContainer = (props) => {
     }
   };
 
-  const CountdownTimer = () => {
-    
-        const interval = setInterval(() => {
-            if (remainingTime) {
-              clearInterval(interval)
-              setRemainingTime(remainingTime - 1);
-            } else {
-                clearInterval(interval);
-            }    
-        }, 1000);
-        return () => clearInterval(interval);
-    }
-
-  //   const CountdownTimerIncorrect = () => {
-    
-  //     const interval = setInterval(() => {
-  //         if (remainingTime > 0) {
-  //           clearInterval(interval)  
-  //           setRemainingTime(remainingTime - 1);
-  //         } else {
-  //             clearInterval(interval);
-  //         }    
-  //     }, 1000);
-  //     return () => clearInterval(interval);
-  // }
-
-    // const timedOut = () => {
-    //   const interval = setInterval(() => {
-    //     if (remainingTime === 0) {
-    //       clearInterval(interval)  
-    //       setRemainingTime(remainingTime - 1);
-    //     } else {
-    //         clearInterval(interval);
-    //     }    
-    // }, 1000);
-    // return () => clearInterval(interval);
-    // }
-
-
   return (
     <div id='MainContainer'>
       <Header />
-      {/* <CountdownTimer
-        remainingTime={remainingTime}
-        setRemainingTime={setRemainingTime}
-      /> */}
       <Pokemon
-        remainingTime={remainingTime}
-        setRemainingTime={setRemainingTime}
-        score={score}
-        setScore={setScore}
-
         pokemon={pokemon}
         getNewPokemon={getNewPokemon}
         hardmode={hardmode}
         setHardmode={setHardmode}
       />
       <UserInput
-        CountdownTimer={CountdownTimer}
-        // CountdownTimerIncorrect={CountdownTimerIncorrect}
-        // timedOut={timedOut}
-        remainingTime={remainingTime}
-        setRemainingTime={setRemainingTime}
-
         score={score}
         setScore={setScore}
         getNewPokemon={getNewPokemon}
