@@ -20,7 +20,7 @@ function NavBar() {
     event.preventDefault();
 
     const leaderBoardRequest = {
-      method: 'PATCH',
+      method: 'GET',
       credentials: 'same-origin',
       headers: { 'Content-type': 'application/json' },
     };

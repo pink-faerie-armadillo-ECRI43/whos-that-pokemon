@@ -6,7 +6,7 @@ const initialState = {
   highScores: [
     {
       userName: '',
-      score: '',
+      userHighScore: '',
     },
   ],
 };
