@@ -1,4 +1,4 @@
-const { Pokemon } = require('../models/pokemonModels');
+const Pokemon = require('../models/pokemonModels');
 const fetch = require('node-fetch');
 
 const pokemonController = {};

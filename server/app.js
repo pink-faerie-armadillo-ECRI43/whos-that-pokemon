@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const apiRouter = require('./routes/api');
+const userRouter = require('./routes/userRouter');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -8,6 +9,7 @@ app.use(express.static(__dirname + '/public/'));
 
 //set up the router here for '/
 app.use('/pokemon', apiRouter);
+app.use('/user', userRouter);
 
 // Unknown route handler
 app.use('*', (req, res) => res.status(404));

@@ -7,11 +7,11 @@ import { Provider } from 'react-redux';
 
 // import ReactDOM from "react-dom"
 import App from './App.jsx';
-import Home from './components/Home.jsx'
+import Home from './components/Home.jsx';
 import SignUp from './components/SignUp.jsx';
 import LeaderBoard from './components/Leaderboard Components/LeaderBoard.jsx';
 
-import styles from '../public/styleSheet.css';
+import styles from './scss/main.scss';
 
 const router = createBrowserRouter([
   {

@@ -1,12 +1,76 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUser } from '../slices/pokemonSlice.js';
+import UserInfoInput from './LogIn-SignUp Components/UserInfoInput.jsx';
+import NavBar from './NavBar.jsx';
 
 const LogIn = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const signIn = (event, username, password) => {
+    event.preventDefault();
+
+    const sendBody = {
+      username: username,
+      password: password,
+    };
+
+    const signInRequest = {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify(sendBody),
+    };
+
+    fetch('/user/logIn', signInRequest)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('data from sign-in fetch', data);
+        if ('err' in data) {
+          alert('Please sign up!');
+          navigate('/signUp');
+          return;
+        }
+        const { _id, username, userHighScore } = data;
+        const updatedUser = { _id, username, userHighScore };
+        dispatch(updateUser(updatedUser));
+        navigate('/home');
+        return;
+      })
+      .catch((err) => {
+        alert('Unable to sign in');
+        console.log(err);
+        return;
+      });
+  };
+
+  const handleUsernameChange = (event) => {
+    const newUsername = event.target.value;
+    setUsername(newUsername);
+  };
+
+  const handlePasswordChange = (event) => {
+    const newPassword = event.target.value;
+    setPassword(newPassword);
+  };
+
   return (
-    <div id='app'>
-      hi
-      <button onClick={() => navigate('/leaderBoard')}>leaderBoard</button>
+    <div className='mainContain'>
+      <NavBar />
+      <UserInfoInput
+        username={username}
+        password={password}
+        handleUsernameChange={handleUsernameChange}
+        handlePasswordChange={handlePasswordChange}
+      />
+      <button onClick={(event) => signIn(event, username, password)}>
+        Log In
+      </button>
     </div>
   );
 };
