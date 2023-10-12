@@ -49,7 +49,7 @@ const RightSideContainer = () => {
         />
         Hardmode
       </div>
-      <label for='generation'>Choose a Generation:</label>
+      <label>Choose a Generation:</label>
       <select
         name='genChoice'
         id='generation'
