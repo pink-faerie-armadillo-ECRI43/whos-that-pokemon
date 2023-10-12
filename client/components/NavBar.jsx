@@ -8,7 +8,11 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
-import { updateLeaderBoard } from '../slices/pokemonSlice.js';
+import {
+  updateLeaderBoard,
+  updateUser,
+  resetUser,
+} from '../slices/pokemonSlice.js';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -33,12 +37,40 @@ function NavBar() {
           alert('Unable to get leaderboard, error from server');
           return;
         }
-        dispatch(updateLeaderBoard(data));
+        dispatch(updateUser(data));
         navigate('/leaderBoard');
         return;
       })
       .catch((err) => {
         alert('Unable to get leaderBoard');
+        console.log(err);
+        return;
+      });
+  };
+
+  const handleLogOut = (event) => {
+    event.preventDefault();
+
+    const logOutRequest = {
+      method: 'GET',
+      credentials: 'same-origin',
+      headers: { 'Content-type': 'application/json' },
+    };
+
+    fetch('/user/logout', logOutRequest)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('data from logOut fetch', data);
+        if ('err' in data || 'error' in data) {
+          alert('Unable to get logOut, error from server');
+          return;
+        }
+        dispatch(resetUser());
+        navigate('/');
+        return;
+      })
+      .catch((err) => {
+        alert('Unable to get logOut');
         console.log(err);
         return;
       });
@@ -93,6 +125,12 @@ function NavBar() {
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
               LogIn
+            </Button>
+            <Button
+              onClick={(event) => handleLogOut(event)}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              Sign Out
             </Button>
           </Box>
         </Toolbar>
