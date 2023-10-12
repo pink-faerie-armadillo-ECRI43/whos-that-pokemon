@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '../../slices/pokemonSlice';
 
 const UserInput = (props) => {
-  const { score, setScore, getNewPokemon, pokemon } = props;
+  const { score, setScore, getNewPokemon, pokemon, setRemainingTime } = props;
 
   const dispatch = useDispatch();
   const username = useSelector((state) => state.pokemon.userInfo.username);

@@ -24,6 +24,8 @@ const Home = () => {
           setScore={setScore}
           hardmode={hardmode}
           setHardmode={setHardmode}
+          remainingTime={remainingTime}
+          setRemainingTime={setRemainingTime}
         />
         <RightSideContainer
           pokemon={pokemon}
