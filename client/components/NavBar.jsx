@@ -8,7 +8,11 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
-import { updateLeaderBoard } from '../slices/pokemonSlice.js';
+import {
+  updateLeaderBoard,
+  updateUser,
+  resetUser,
+} from '../slices/pokemonSlice.js';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -44,6 +48,34 @@ function NavBar() {
       });
   };
 
+  const handleLogOut = (event) => {
+    event.preventDefault();
+
+    const logOutRequest = {
+      method: 'GET',
+      credentials: 'same-origin',
+      headers: { 'Content-type': 'application/json' },
+    };
+
+    fetch('/user/logout', logOutRequest)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('data from logOut fetch', data);
+        if ('err' in data || 'error' in data) {
+          alert('You are not signed in!');
+          return;
+        }
+        dispatch(resetUser());
+        navigate('/');
+        return;
+      })
+      .catch((err) => {
+        alert('Unable to get logOut');
+        console.log(err);
+        return;
+      });
+  };
+
   return (
     <AppBar position='static' sx={{ backgroundColor: '#2c387e' }}>
       <Container maxWidth='xl'>
@@ -74,8 +106,6 @@ function NavBar() {
             </Button>
             <Button
               onClick={(event) => handleLeaderBoard(event)}
-              // component={Link}
-              // to='/Leaderboard'
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
               Leaderboard
@@ -93,6 +123,12 @@ function NavBar() {
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
               LogIn
+            </Button>
+            <Button
+              onClick={(event) => handleLogOut(event)}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              Sign Out
             </Button>
           </Box>
         </Toolbar>
