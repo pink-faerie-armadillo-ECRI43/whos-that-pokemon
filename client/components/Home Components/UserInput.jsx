@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const UserInput = (props) => {
-  const { score, setScore, getNewPokemon, pokemon } = props;
+  const { score, setScore, getNewPokemon, pokemon, remainingTime, setRemainingTime, CountdownTimer } = props;
 
   // upon user submission, checks to see if submitted answer is correct
   // if correct it will alert and increment score
@@ -15,12 +15,31 @@ const UserInput = (props) => {
       alert('Correct! Well done!');
       setScore(score + 1);
       getNewPokemon();
+    
+      setRemainingTime(17);
+      CountdownTimer();
+
       e.target.reset();
     } else {
-      alert(`Incorrect! The correct answer was ${pokemon.name}.`);
+      alert(`Incorrect! The correct answer was ${pokemon.name}. Restart the game?`);
       setScore(0);
       getNewPokemon();
+      
+      setRemainingTime(17)
+      CountdownTimer();
+
       e.target.reset();
+    // } else if (remainingTime === 0) {
+    //   alert(`Times up! Restart the game?`);
+    //   setScore(0);
+    //   getNewPokemon();
+      
+    //   setRemainingTime(8)
+    //   timedOut();
+      
+      
+
+    //   e.target.reset();
     }
   };
 
