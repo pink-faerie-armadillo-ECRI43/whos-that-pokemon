@@ -51,6 +51,7 @@ const UserInput = (props) => {
       alert('Correct! Well done!');
       setScore(score + 1);
       getNewPokemon();
+      setRemainingTime(15);
       e.target.reset();
     } else {
       alert(`Incorrect! The correct answer was ${pokemon.name}.`);
@@ -58,7 +59,8 @@ const UserInput = (props) => {
         handleHighScoreUpdate(score);
       }
       setScore(0);
-      getNewPokemon();
+      getNewPokemon();  
+      setRemainingTime(15)
       e.target.reset();
     }
   };

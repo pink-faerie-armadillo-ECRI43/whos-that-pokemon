@@ -15,7 +15,8 @@ Holds Header, Pokemon, and User Input components.
 */
 
 const MainContainer = (props) => {
-  const { score, setScore, pokemon, setPokemon, hardmode, setHardmode } = props;
+  const { score, setScore, pokemon, setPokemon, hardmode, setHardmode, remainingTime, setRemainingTime } = props;
+  console.log(pokemon.name)
 
   // Fetch new pokemon from the database:
   const getNewPokemon = async () => {
@@ -37,16 +38,23 @@ const MainContainer = (props) => {
     }
   };
 
+
   return (
     <div id='MainContainer'>
       <Header />
       <Pokemon
+        remainingTime={remainingTime}
+        setRemainingTime={setRemainingTime}
+        score={score}
+        setScore={setScore}
         pokemon={pokemon}
         getNewPokemon={getNewPokemon}
         hardmode={hardmode}
         setHardmode={setHardmode}
       />
       <UserInput
+        remainingTime={remainingTime}
+        setRemainingTime={setRemainingTime}
         score={score}
         setScore={setScore}
         getNewPokemon={getNewPokemon}
